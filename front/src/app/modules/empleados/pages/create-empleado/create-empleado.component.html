@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <h1>Crear empleado</h1>
+  </div>
+  <div class="col text-end">
+    <p-button icon="pi pi-undo" [routerLink]="[`/empleados/list-empleados`]"></p-button>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <app-form-empleado (eventEmitterFormEmpleado)="crearEmpleado($event)"></app-form-empleado>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<p-toast></p-toast>
+
+@if(spinner){
+    <app-primeng-spinner></app-primeng-spinner>
+}@else{
+  <div class="row">
+    <div class="col">
+      <h1>Listar empleados</h1>
+    </div>
+  </div>
+<div class="row">
+  <div class="col">
+    <app-tabla-empleados-list (eventEmitterTableEmpleado)="listarEmpleados()" [empleados]="empleados"></app-tabla-empleados-list>
+  </div>
+</div>
+}

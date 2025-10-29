@@ -1,0 +1,29 @@
+@if(spinner){
+<app-primeng-spinner></app-primeng-spinner>
+}@else {
+<div class="row">
+  <div class="col">
+    <h1>Detalle empleado</h1>
+  </div>
+  <div class="col text-end">
+    <p-button icon="pi pi-undo" [routerLink]="[`/empleados/list-empleados`]"></p-button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p-card>
+      <div class="row">
+        <div class="col">
+          <h2>Nombre: {{ empleado.nombre }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2>Empresa: {{ empleado.empresa?.nombre }}</h2>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
+}

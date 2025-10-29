@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="sendEmpleado()" autocomplete="off">
+  <div class="row">
+    <div class="col">
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        formControlName="nombre"
+        id="nombre"
+        pInputText
+        [style]="{ width: '100%' }"
+      />
+      @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched){
+      <span class="text-danger">Este campo es obligatorio</span>
+      }
+    </div>
+  </div>
+  <div class="row mt-3">
+    <label for="empresa">Empresa:</label>
+    <p-select
+      [options]="empresas"
+      optionLabel="nombre"
+      optionValue="id"
+      placeholder="Seleccione una empresa"
+      class="w-full w-100"
+      appendTo="body"
+      formControlName="empresa"
+    />
+    @if(form.get('empresa')?.hasError('required') && form.get('empresa')?.touched){
+    <span class="text-danger">Este campo es obligatorio</span>
+    }
+  </div>
+  <div class="row mt-3 text-center">
+    <div class="col">
+      <p-button
+        type="submit"
+        [disabled]="form.invalid"
+        [label]="title"
+        [rounded]="true"
+        severity="success"
+      ></p-button>
+    </div>
+  </div>
+</form>
