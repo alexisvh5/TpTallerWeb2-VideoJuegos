@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -8,15 +7,77 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model empleado {
-  id         Int      @id @default(autoincrement())
-  nombre     String   @db.Char(50)
-  id_empresa Int?
-  empresa    empresa? @relation(fields: [id_empresa], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "id_empresa")
+model Carrito {
+  id           Int            @id @default(autoincrement())
+  idUsuario    Int            @unique
+  Usuario      Usuario        @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  CarritoJuego CarritoJuego[]
 }
 
-model empresa {
-  id       Int        @id @default(autoincrement())
-  nombre   String     @db.Char(50)
-  empleado empleado[]
+model Compra {
+  id          Int          @id @default(autoincrement())
+  idUsuario   Int
+  fecha       DateTime?    @default(now()) @db.Timestamptz(6)
+  totalPagado Decimal      @db.Decimal(10, 2)
+  Usuario     Usuario      @relation(fields: [idUsuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ItemCompra  ItemCompra[]
+}
+
+model Genero {
+  id          Int           @id @default(autoincrement())
+  nombre      String        @unique @db.VarChar(100)
+  JuegoGenero JuegoGenero[]
+}
+
+model ItemCompra {
+  id              Int     @id @default(autoincrement())
+  idCompra        Int
+  idJuego         Int
+  precioAlComprar Decimal @db.Decimal(10, 2)
+  Compra          Compra  @relation(fields: [idCompra], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  Juego           Juego   @relation(fields: [idJuego], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model Juego {
+  id            Int            @id @default(autoincrement())
+  nombre        String         @db.VarChar(255)
+  anio          Int
+  descripcion   String?
+  desarrollador String?        @db.VarChar(255)
+  precio        Decimal        @default(0.00) @db.Decimal(10, 2)
+  ItemCompra    ItemCompra[]
+  CarritoJuego  CarritoJuego[]
+  JuegoGenero   JuegoGenero[]
+}
+
+model Usuario {
+  id          Int      @id @default(autoincrement())
+  nombre      String   @db.VarChar(255)
+  apellido    String   @db.VarChar(255)
+  direccion   String   @db.VarChar(255)
+  email       String   @unique @db.VarChar(255)
+  contrasenia String   @db.VarChar(255)
+  Carrito     Carrito?
+  Compra      Compra[]
+}
+
+model CarritoJuego {
+  A       Int
+  B       Int
+  Carrito Carrito @relation(fields: [A], references: [id], onDelete: Cascade)
+  Juego   Juego   @relation(fields: [B], references: [id], onDelete: Cascade)
+
+  @@id([A, B])
+  @@map("_CarritoJuego")
+}
+
+model JuegoGenero {
+  A      Int
+  B      Int
+  Juego  Juego  @relation(fields: [A], references: [id], onDelete: Cascade)
+  Genero Genero @relation(fields: [B], references: [id], onDelete: Cascade)
+
+  @@id([A, B])
+  @@map("_JuegoGenero")
 }
