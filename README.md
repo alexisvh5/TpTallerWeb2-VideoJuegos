@@ -28,31 +28,30 @@ El sistema está dividido en:
 | **Gestión de dependencias** | npm |
 
 ---
-
 ## 🧩 Estructura general del proyecto
 
+```bash
 TpTallerWeb-VideoJuegos/
 │
-├── front/ # Proyecto Angular (Frontend)
-│ ├── src/app/
-│ │ ├── api/services/ # Servicios HTTP
-│ │ ├── modules/usuarios/ # Módulo de gestión de usuarios
-│ │ ├── modules/juegos/ # Módulo de gestión de juegos
-│ │ └── shared/ # Componentes comunes
-│ └── environments/ # Configuración de entornos
+├── front/                      # Proyecto Angular (Frontend)
+│   ├── src/app/
+│   │   ├── api/services/       # Servicios HTTP
+│   │   ├── modules/usuarios/   # Módulo de gestión de usuarios
+│   │   ├── modules/juegos/     # Módulo de gestión de juegos
+│   │   └── shared/             # Componentes comunes
+│   └── environments/           # Configuración de entornos
 │
-├── back/ # Proyecto Node + Express + Prisma
-│ ├── prisma/schema.prisma # Definición del modelo de datos
-│ ├── src/
-│ │ ├── controllers/ # Controladores de Express
-│ │ ├── repositories/ # Repositorios (Prisma)
-│ │ ├── services/ # Lógica de negocio
-│ │ └── routes/ # Rutas de la API
-│ └── .env # Variables de entorno
+├── back/                       # Proyecto Node + Express + Prisma
+│   ├── prisma/schema.prisma    # Definición del modelo de datos
+│   ├── src/
+│   │   ├── controllers/        # Controladores de Express
+│   │   ├── repositories/       # Repositorios (Prisma)
+│   │   ├── services/           # Lógica de negocio
+│   │   └── routes/             # Rutas de la API
+│   └── .env                    # Variables de entorno
 │
 └── database/
-└── sqlJuegos.sql # Script de creación e inserción de datos iniciales
-
+    └── sqlJuegos.sql           # Script de creación e inserción de datos iniciales
 
 ---
 
