@@ -55,14 +55,16 @@ CREATE TABLE "ItemCompra" (
 
 
 
-INSERT INTO "Genero" ("nombre") VALUES ('RPG'), ('Acción'), ('Aventura'), ('Estrategia');
+INSERT INTO "Genero" ("nombre") VALUES ('RPG'), ('ACCION'), ('AVENTURA'), ('ESTRATEGIA');
+-- los generos en mayuscula y sin tilde
 
 
 INSERT INTO "Juego" ("nombre", "anio", "descripcion", "desarrollador", "precio") VALUES
 ('The Witcher 3: Wild Hunt', 2015, 'Un juego de rol de mundo abierto...', 'CD Projekt Red', 49.99),
 ('God of War', 2018, 'Kratos se aventura en el mundo nórdico...', 'Santa Monica Studio', 59.99),
 ('The Legend of Zelda: Breath of the Wild', 2017, 'Explora un vasto reino de Hyrule...', 'Nintendo', 59.99),
-('Age of Empires II', 1999, 'Juego de estrategia en tiempo real...', 'Ensemble Studios', 19.99);
+('Age of Empires II', 1999, 'Juego de estrategia en tiempo real...', 'Ensemble Studios', 19.99),
+('Assassin s Creed Shadows', 2025, 'Assassin s Creed Shadows es un videojuego de acción-aventura de mundo abierto y sigilo', 'Ubisoft', 79.99);
 
 -- Conectar géneros (Asumimos IDs 1-4 para juegos, 1-4 para géneros)
 INSERT INTO "_JuegoGenero" ("A", "B") VALUES 

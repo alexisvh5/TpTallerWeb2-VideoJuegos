@@ -1,0 +1,45 @@
+import { prisma } from "../prisma.js";
+
+export class JuegoRepository {
+  async findAllJuegos() {
+    return await prisma.juego.findMany();
+  }
+
+  async findJuegoById(id: number) {
+    return await prisma.juego.findUnique({
+      where: { id },
+    });
+  }
+
+  async getJuegosPorGenero(genero: string) {
+    return await prisma.juego.findMany({
+      where: {
+        JuegoGenero: {
+          some: {
+            //buscar algun juego que tenga ese genero
+            Genero: {
+              nombre: genero,
+            },
+          },
+        },
+      },
+      include: {
+        JuegoGenero: {
+          include: {
+            Genero: true,
+          },
+        },
+      },
+    });
+  }
+
+  async getJuegosNuevos() {
+    const anioActual = new Date().getFullYear();
+    
+    return await prisma.juego.findMany({
+      where: {
+        anio: anioActual,
+      },
+    });
+  }
+}
