@@ -3,11 +3,11 @@ import { EmpleadosService } from '../../../../api/services/empleados/empleados.s
 import { Empleado } from '../../interfaces/empleado.interface';
 import { TableModule } from 'primeng/table';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { TablaEmpleadosList } from "../../components/tabla-juegos-list/tabla-juegos-list";
 import { PrimengSpinner } from "../../../../shared/components/primeng/primeng-spinner/primeng-spinner";
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { Toast } from 'primeng/toast';
+import { TablaEmpleadosList } from '../../components/tabla-empleados-list/tabla-empleados-list';
 @Component({
   selector: 'app-list-empleados',
   imports: [TableModule, ProgressSpinnerModule, TablaEmpleadosList, PrimengSpinner,ToastModule,Toast],
