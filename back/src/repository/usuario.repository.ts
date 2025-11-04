@@ -2,8 +2,7 @@ import { prisma } from "../prisma.js";
 
 
 export class UsuarioRepository{        
-    
-
+  
 
   async createUsuario(data: { nombre: string; apellido: string; direccion: string; email: string; contrasenia: string }) {
     return await prisma.usuario.create({ data });
