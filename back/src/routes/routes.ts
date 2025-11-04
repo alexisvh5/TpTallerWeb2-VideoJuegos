@@ -1,5 +1,5 @@
 import { Router } from "express";
-import empleadoRouter from "./empleado-router/empleado.routes.js";
+import usuarioRouter from "./usuario.router/usuario.routes.js";
 
 export class AppRoutes {
 
@@ -7,7 +7,7 @@ export class AppRoutes {
 
         const  router = Router();
 
-        router.use('/api/empleado',empleadoRouter)
+        router.use('/api/usuario',usuarioRouter)
 
         return router;
     }
