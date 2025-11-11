@@ -14,6 +14,7 @@ export class UsuarioController {
       res.status(201).json({ mensaje: "Usuario registrado correctamente", usuario: nuevoUsuario });
     } catch (error: any) {
       res.status(400).json({ error: error.message });
+      console.log('no se pudio' + error);
     }
   }
 

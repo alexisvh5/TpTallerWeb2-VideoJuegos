@@ -42,4 +42,8 @@ export class JuegoRepository {
       },
     });
   }
+
+  async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number}){
+    return await prisma.juego.create({data});
+  }
 }
