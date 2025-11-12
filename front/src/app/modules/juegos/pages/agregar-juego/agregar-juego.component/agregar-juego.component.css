@@ -1,0 +1,247 @@
+form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+form::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.15), transparent);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+form::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.15), transparent);
+  border-radius: 50%;
+  bottom: -50px;
+  left: -50px;
+  animation: pulse 4s ease-in-out infinite 2s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+form h2 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(138, 43, 226, 0.5),
+               0 0 40px rgba(138, 43, 226, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+form > div {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 0 60px rgba(138, 43, 226, 0.1);
+  width: 450px;
+  max-width: 90%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+form label:first-of-type {
+  margin-top: 0;
+}
+
+form input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px 20px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  margin-bottom: 0.5rem;
+}
+
+form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+form input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #8a2be2;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+  transform: translateY(-2px);
+}
+
+form button {
+  background: linear-gradient(135deg, #8a2be2, #5a189a);
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+form button:hover::before {
+  left: 100%;
+}
+
+form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6);
+  background: linear-gradient(135deg, #9d4edd, #6a1b9a);
+}
+
+form button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 15px rgba(138, 43, 226, 0.5);
+}
+
+form > p {
+  color: #b0b0b0;
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+}
+
+form > p a {
+  color: #8a2be2;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+form > p a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #8a2be2;
+  transition: width 0.3s ease;
+}
+
+form > p a:hover {
+  color: #9d4edd;
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+form > p a:hover::after {
+  width: 100%;
+}
+
+/* Mensaje de error */
+form > p:has([style*="color:red"]),
+form > p:has([style*="color: red"]) {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #ff6b6b !important;
+  margin-top: 1.5rem;
+  animation: shake 0.5s ease;
+}
+
+/* Mensaje de éxito */
+form > p:has([style*="color:green"]),
+form > p:has([style*="color: green"]) {
+  background: rgba(40, 167, 69, 0.1);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #51cf66 !important;
+  margin-top: 1.5rem;
+  animation: slideInUp 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  form h2 {
+    font-size: 2rem;
+  }
+
+  form > div {
+    padding: 2rem 1.5rem;
+    width: 100%;
+  }
+}

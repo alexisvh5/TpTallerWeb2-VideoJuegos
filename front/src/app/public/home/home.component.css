@@ -4,6 +4,7 @@
   padding: 2rem;
   position: relative;
   overflow-x: hidden;
+  z-index: 0;
 }
 
 .home-container::before {

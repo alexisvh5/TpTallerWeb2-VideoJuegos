@@ -27,4 +27,8 @@ export class JuegoService {
   getJuegosNuevos(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/new/nuevos`);
   }
+
+  agregarJuego(juego:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/agregar`, juego)
+  }
 }

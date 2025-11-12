@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
         items: [
           { label: 'Lista de juegos', icon: 'pi pi-list', command: () => this.router.navigate(['/home']) },
           { label: 'Ofertas', icon: 'pi pi-percentage', command: () => alert('Ofertas próximamente') },
-          { label: 'Agregar Juego', icon: 'pi pi-plus' }
+          { label: 'Agregar Juego', icon: 'pi pi-plus', command: () => this.router.navigate(['/juego/agregar']) }
         ]
       },
       {

@@ -22,6 +22,10 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/empleados/empleados.routes').then(e => e.empleadosRoutes)
     },
     {
+        path: 'juego',
+        loadChildren: () => import('./modules/juegos/juegos.routes').then(j => j.juegosRoutes)
+    },
+    {
         path: '**',
         redirectTo: 'login'
     }

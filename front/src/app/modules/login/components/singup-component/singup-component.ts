@@ -26,9 +26,6 @@ export class SingupComponent {
     contrasenia: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  constructor(
-    ){}
-
 
   signUp(){
     if(this.form.invalid){

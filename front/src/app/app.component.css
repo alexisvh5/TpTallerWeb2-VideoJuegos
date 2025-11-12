@@ -1,0 +1,8 @@
+.p-menubar {
+  position: relative;
+  z-index: 2000;
+}
+
+.p-tieredmenu {
+  z-index: 3000 !important;
+}
