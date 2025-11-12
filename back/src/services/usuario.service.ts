@@ -39,7 +39,19 @@ export class UsuarioService {
     }
 
     // Comparar contraseñas
-    const contraseniaValida = await bcrypt.compare(contrasenia, usuario.contrasenia);
+    let contraseniaValida = false;
+
+    if (usuario.contrasenia.startsWith("$2")) {
+  // Contraseña hasheada
+      contraseniaValida = await bcrypt.compare(contrasenia, usuario.contrasenia);
+    } else {
+      this.usuarioRepository.updatePasswordUsuario(usuario.id, await bcrypt.hash(contrasenia, 10));
+      contraseniaValida = contrasenia === usuario.contrasenia;
+    }
+
+    // if(usuario.contrasenia === '1234'){
+    //   contraseniaValida = true;
+    // }
 
     if (!contraseniaValida) {
       throw new Error("Contraseña incorrecta");

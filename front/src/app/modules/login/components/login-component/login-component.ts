@@ -23,7 +23,6 @@ export class LoginComponent {
     this.autService.login({email: this.email, contrasenia: this.contrasenia}).subscribe({
       next:(res)=>{
         this.autService.guardarUsuarioEnSesion(res.usuario);
-        alert('Login exitoso');
         this.router.navigate(['/home']);
       },
       error:(err)=>{

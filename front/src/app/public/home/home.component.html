@@ -17,10 +17,12 @@
         <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
         <p><strong>Precio:</strong> {{ juego.precio }}</p>
         <p>{{ juego.descripcion }}</p>
-        <div class="card-actions">
-          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"/>
-          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"/>
-        </div>
+        @if(usuario && usuario.rol?.toLowerCase() === 'admin'){
+          <div class="card-actions">
+            <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)" />
+            <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)" />
+          </div>
+        }
       </div>
     }
 

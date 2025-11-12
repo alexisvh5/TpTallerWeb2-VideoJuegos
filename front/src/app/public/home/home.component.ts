@@ -15,9 +15,17 @@ export class HomeComponent implements OnInit{
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
-
+  usuario: any;
 
   ngOnInit(): void {
+
+    const data = localStorage.getItem('USUARIO');
+
+    if(data){
+      this.usuario = JSON.parse(data);
+      console.log('Usuario logueado:', this.usuario);
+    }
+
     this.juegoService.getAll().subscribe({
       next: (res) => {
         this.juegos = res;
@@ -29,6 +37,8 @@ export class HomeComponent implements OnInit{
         console.error(err);
       }
     })
+
+
   }
 
   eliminarJuego(id:number){

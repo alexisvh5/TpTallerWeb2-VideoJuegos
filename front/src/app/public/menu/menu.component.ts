@@ -7,6 +7,7 @@ import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
+import { AdminGuard } from '../../api/guards/admin.guard';
 
 @Component({
   selector: 'app-menu',
@@ -18,8 +19,27 @@ export class MenuComponent implements OnInit {
   items: MenuItem[] = [];
   auth = inject(AutenticacionService);
   router = inject(Router);
+  adminGuard = inject(AutenticacionService);
 
   ngOnInit() {
+    const juegosItems: any[] = [
+      { label: 'Lista de juegos', icon: 'pi pi-list', command: () => this.router.navigate(['/home']) },
+      { label: 'Ofertas', icon: 'pi pi-percentage', command: () => alert('Ofertas próximamente') },
+    ];
+
+    // 👇 Si el usuario es admin, agregamos la opción extra
+    const usuarioData = localStorage.getItem('USUARIO');
+    if (usuarioData) {
+      const usuario = JSON.parse(usuarioData);
+      if (usuario.rol === 'ADMIN') {
+        juegosItems.push({
+          label: 'Agregar Juego',
+          icon: 'pi pi-plus',
+          command: () => this.router.navigate(['/juego/agregar'])
+        });
+      }
+    }
+
     this.items = [
       {
         label: 'Home',
@@ -29,11 +49,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Juegos',
         icon: 'pi pi-star',
-        items: [
-          { label: 'Lista de juegos', icon: 'pi pi-list', command: () => this.router.navigate(['/home']) },
-          { label: 'Ofertas', icon: 'pi pi-percentage', command: () => alert('Ofertas próximamente') },
-          { label: 'Agregar Juego', icon: 'pi pi-plus', command: () => this.router.navigate(['/juego/agregar']) }
-        ]
+        items: juegosItems
       },
       {
         label: 'Salir',
@@ -44,7 +60,7 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    localStorage.removeItem('USUARIO');
     this.router.navigate(['/login']);
   }
 }

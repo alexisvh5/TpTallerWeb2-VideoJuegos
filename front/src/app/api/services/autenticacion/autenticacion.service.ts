@@ -13,8 +13,6 @@ export class AutenticacionService {
 http = inject(HttpClient);
 router = inject(Router);
 
-constructor(private route:HttpClient){}
-
 registrarse(data:any): Observable<any>{
   return this.http.post(`${environment.api_url}/usuario/signup`, data);
 }

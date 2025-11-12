@@ -28,6 +28,9 @@ CREATE TABLE "Usuario"(
     "contrasenia" VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE "Usuario"
+ADD COLUMN "rol" VARCHAR(20) NOT NULL DEFAULT 'USER';
+
 CREATE TABLE "Carrito"(
     "id" SERIAL PRIMARY KEY,
     "idUsuario" INTEGER NOT NULL UNIQUE REFERENCES "Usuario"("id") ON DELETE CASCADE ON UPDATE CASCADE
@@ -81,6 +84,10 @@ INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia"
 ('Juan', 'Pérez', 'Calle Falsa 123', 'juan.perez@email.com', 'hash_simulado_de_juan'),
 ('Ana', 'Gómez', 'Avenida Siempre Viva 742', 'ana.gomez@email.com', 'hash_simulado_de_ana');
 -- Asumimos Juan ID 1, Ana ID 2
+
+-- contraseña: 1234
+INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia", "rol") VALUES
+('Admin', 'Test', '-', 'Admin@test.com', '$2b$10$i4C5COxkl4LGP9FWkaJ4/.u18j7p3Z6e2QXYRIBBCZNdqer.j6xuC', 'ADMIN'),
 
 -- ########## PASO 2: CREAR CARRITOS ##########
 INSERT INTO "Carrito" ("idUsuario") VALUES (1), (2);
