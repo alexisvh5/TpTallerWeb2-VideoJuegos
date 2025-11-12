@@ -143,15 +143,170 @@
   z-index: 1;
 }
 
-.card-actions{
+.card-actions {
   position: absolute;
   top: 1rem;
   right: 1rem;
   display: flex;
   gap: 0.5rem;
-  z-index: 2;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
+.card:hover .card-actions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* Estilos para los botones de PrimeNG */
+.card-actions ::ng-deep .p-button {
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  border-radius: 12px;
+  border: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 3;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover .card-actions {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+/* Estilos para los botones de PrimeNG */
+.card-actions ::ng-deep .p-button {
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  border-radius: 12px;
+  border: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-actions ::ng-deep .p-button .p-button-icon {
+  font-size: 1.1rem;
+}
+
+/* Botón de editar (naranja) */
+.card-actions ::ng-deep .p-button-warning {
+  background: linear-gradient(135deg, #ff8c42, #ff6b35) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-actions ::ng-deep .p-button-warning::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.card-actions ::ng-deep .p-button-warning:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 140, 66, 0.6);
+  background: linear-gradient(135deg, #ffa05c, #ff7d4f) !important;
+}
+
+.card-actions ::ng-deep .p-button-warning:hover::before {
+  left: 100%;
+}
+
+.card-actions ::ng-deep .p-button-warning:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Botón de eliminar (rojo) */
+.card-actions ::ng-deep .p-button-danger {
+  background: linear-gradient(135deg, #ff4757, #dc143c) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-actions ::ng-deep .p-button-danger::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.card-actions ::ng-deep .p-button-danger:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+  background: linear-gradient(135deg, #ff5c6c, #ee3649) !important;
+}
+
+.card-actions ::ng-deep .p-button-danger:hover::before {
+  left: 100%;
+}
+
+.card-actions ::ng-deep .p-button-danger:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Efecto de pulso sutil cuando aparecen */
+.card:hover .card-actions ::ng-deep .p-button {
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Responsive - en móviles los botones siempre visibles pero más pequeños */
+@media (max-width: 768px) {
+  .card-actions {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+    top: 0.75rem;
+    right: 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .card-actions ::ng-deep .p-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .card-actions ::ng-deep .p-button .p-button-icon {
+    font-size: 0.95rem;
+  }
+}
 
 .card {
   background: rgba(255, 255, 255, 0.05);

@@ -42,4 +42,8 @@ export class HomeComponent implements OnInit{
       }
     })
   }
+
+  editarJuego(id: number) {
+  this.router.navigate(['/juego/modificar/', id]);
+}
 }
