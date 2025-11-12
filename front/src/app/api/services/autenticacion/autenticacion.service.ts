@@ -26,11 +26,16 @@ guardarUsuarioEnSesion(usuario:any){
 }
 
 getUsuarioEnSesion(){
-  return JSON.parse(localStorage.getItem('USUARIO') || 'null');
+  const usuario = localStorage.getItem('USUARIO');
+  return usuario ? JSON.parse(usuario) : null;
 }
 
 logout(){
   localStorage.removeItem('USUARIO');
+}
+
+isLoggedIn(): boolean{
+  return this.getUsuarioEnSesion() !== null;
 }
 
 }
