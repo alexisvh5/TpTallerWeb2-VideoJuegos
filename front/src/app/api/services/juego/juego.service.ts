@@ -39,5 +39,7 @@ export class JuegoService {
   modificarJuego(id:number, data:any): Observable<any>{
     return this.http.put<any>(`${this.apiUrl}/modificar/${id}`, data);
   }
+
+  // buscarPorNombre()
 }
 

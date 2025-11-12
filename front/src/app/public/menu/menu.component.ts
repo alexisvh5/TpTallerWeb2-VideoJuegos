@@ -8,6 +8,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AdminGuard } from '../../api/guards/admin.guard';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { JuegoService } from '../../api/services/juego/juego.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +22,12 @@ export class MenuComponent implements OnInit {
   auth = inject(AutenticacionService);
   router = inject(Router);
   adminGuard = inject(AutenticacionService);
+  searchTerm: string = '';
+  juegosFiltrados = [];
+  juegoService = inject(JuegoService);
+
+  private searchSubject = new Subject<string>();
+
 
   ngOnInit() {
     const juegosItems: any[] = [
@@ -57,6 +65,32 @@ export class MenuComponent implements OnInit {
         command: () => this.logout()
       }
     ];
+
+    this.searchSubject.pipe(
+      debounceTime(300), // espera 300ms tras dejar de escribir
+      distinctUntilChanged()
+    ).subscribe((term) => this.buscarJuegos(term));
+  }
+
+  onSearchChange() {
+    this.searchSubject.next(this.searchTerm);
+  }
+
+  buscarJuegos(term: string) {
+    if (!term.trim()) {
+      this.juegosFiltrados = [];
+      return;
+    }
+
+    this.juegoService.buscarPorNombre(term).subscribe({
+      next: (juegos) => {
+        this.juegosFiltrados = juegos;
+        console.log('Resultados:', juegos);
+      },
+      error: (err) => console.error(err)
+    });
+
+
   }
 
   logout() {

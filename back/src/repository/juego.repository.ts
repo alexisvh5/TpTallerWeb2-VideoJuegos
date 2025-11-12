@@ -13,7 +13,12 @@ export class JuegoRepository {
 
   async findJuegoByNombre(nombre: string) {
     return await prisma.juego.findMany({
-      where: { nombre: nombre },
+      where: { 
+        nombre: {
+          contains: nombre,
+          mode: 'insensitive'
+        } 
+      },
     });
   }
 
@@ -64,4 +69,6 @@ export class JuegoRepository {
       where:{id},data
     })
   }
+
+
 }

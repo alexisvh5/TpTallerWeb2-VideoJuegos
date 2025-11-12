@@ -7,8 +7,7 @@
 
   <ng-template pTemplate="end">
     <div class="flex items-center gap-2">
-      <input type="text" pInputText placeholder="Buscar" class="w-36" />
-      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+      <input type="text" pInputText placeholder="Buscar juego" class="w-36" pInputText [(ngModel)]="searchTerm" (input)="onSearchChange()"/>
     </div>
   </ng-template>
 </p-menubar>

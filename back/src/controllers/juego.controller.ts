@@ -110,4 +110,18 @@ export class JuegoController {
     }
   }
 
+  async buscarPorNombre(req: Request, res: Response){
+    try{
+      const { nombre } = req.query;
+      if (!nombre || typeof nombre !== 'string' || nombre.trim() === '') {
+        return res.status(400).json({ message: "El parámetro nombre no puede estar vacio" });
+      }
+
+      const juegos = await juegoService.buscarPorNombre(nombre);
+      res.status(200).json({message: "Juegos encontrados", juegos: juegos})
+    }catch(error:any){
+      res.status(500).json({error: error.message})
+    }
+  }
+
 }
