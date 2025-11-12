@@ -11,6 +11,12 @@ export class JuegoRepository {
     });
   }
 
+  async findJuegoByNombre(nombre: string) {
+    return await prisma.juego.findMany({
+      where: { nombre: nombre },
+    });
+  }
+
   async getJuegosPorGenero(genero: string) {
     return await prisma.juego.findMany({
       where: {

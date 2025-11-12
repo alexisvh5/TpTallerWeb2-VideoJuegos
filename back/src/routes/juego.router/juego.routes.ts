@@ -9,5 +9,6 @@ juegoRouter.get("/",juegoController.getAll.bind(juegoController));
 juegoRouter.get("/:id",juegoController.getById.bind(juegoController));
 juegoRouter.get("/genero/:genero",juegoController.getJuegosPorGenero.bind(juegoController));//genero se pasa por query creo
 juegoRouter.get("/new/nuevos",juegoController.getJuegosNuevos.bind(juegoController));// este no va es para probar
+juegoRouter.post("/agregar", juegoController.agregarJuego.bind(juegoController));
 
 export default juegoRouter;

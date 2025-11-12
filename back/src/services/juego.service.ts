@@ -23,4 +23,25 @@ export class JuegoService {
     return await this.juegoRepository.getJuegosNuevos();
   }
 
+  async agregarJuego(data: {
+      id:number,
+      nombre:string,
+      anio:number,
+      descripcion:string,
+      desarrollador:string,
+      precio:number
+    }) {
+      // Verificar que no exista el nombre
+      const existente = await this.juegoRepository.findJuegoByNombre(data.nombre);
+      if (existente.length > 0) {
+        throw new Error("Ya existe un juego con el mismo nombre o parecido. Intente con otro nombre.");
+      }
+  
+      // Crear juego nuevo
+      return await this.juegoRepository.agregarJuego({
+        ...data
+      });
+    }
+
+
 }

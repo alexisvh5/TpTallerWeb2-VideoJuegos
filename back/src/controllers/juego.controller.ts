@@ -7,6 +7,17 @@ const juegoService = new JuegoService(juegoRepository);
 
 export class JuegoController {
 
+  async agregarJuego(req: Request, res: Response) {
+  
+    try {
+      const nuevoJuego = await juegoService.agregarJuego(req.body);
+      res.status(201).json({ mensaje: "Juego agregado correctamente", juego: nuevoJuego });
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  
+  }
+
   async getAll(req: Request, res: Response) {
     try {
       const juegos = await juegoService.getAllJuegos();

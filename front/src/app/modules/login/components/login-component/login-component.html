@@ -14,10 +14,10 @@
   <button (click)="loguearse()">Iniciar Sesion</button>
 </div>
 
-  <p>No tenes una cuenta existente? <a [routerLink]="['/login/signup']" >Registrate</a></p>
+  <p class="cuenta">No tenes una cuenta existente? <a [routerLink]="['/login/signup']" >Registrate</a></p>
 
   @if(error){
-    <p style="color: red">{{ error }}</p>
+    <p class="error" style="color: red">{{ error }}</p>
   }
 
 </div>
