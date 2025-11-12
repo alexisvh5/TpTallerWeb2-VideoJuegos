@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "crud-empleados-front:build:production"
+              "buildTarget": "crud-juegos-front:build:production"
             },
             "development": {
-              "buildTarget": "crud-empleados-front:build:development"
+              "buildTarget": "crud-juegos-front:build:development"
             }
           },
           "defaultConfiguration": "development"
