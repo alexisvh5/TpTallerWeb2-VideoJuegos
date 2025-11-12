@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { JuegoService } from '../../api/services/juego/juego.service';
 import { Button } from "primeng/button";
+import { CarritoService } from '../../api/services/carrito/carrito.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { Button } from "primeng/button";
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
+  private carritoService = inject(CarritoService);
   private juegoService = inject(JuegoService);
   private router = inject(Router)
   juegos:any[] = [];
@@ -45,5 +47,15 @@ export class HomeComponent implements OnInit{
 
   editarJuego(id: number) {
   this.router.navigate(['/juego/modificar/', id]);
-}
+  }
+
+  agregarAlCarrito(idJuego: number) {
+    const idUsuario = localStorage.getItem('USUARIO') ? JSON.parse(localStorage.getItem('USUARIO')!).id : null;
+
+    this.carritoService.agregarJuego(idUsuario, idJuego).subscribe({
+    next: () => alert('Juego agregado al carrito'),
+    error: (err) => console.error(err),
+  });
+  }
+
 }
