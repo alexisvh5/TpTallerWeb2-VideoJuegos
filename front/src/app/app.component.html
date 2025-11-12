@@ -1,2 +1,7 @@
-<app-menu>
-  <router-outlet>
+  @if(isLoggedIn()){
+      <app-menu></app-menu>
+  } @else {
+      <router-outlet></router-outlet>
+  }
+
+
