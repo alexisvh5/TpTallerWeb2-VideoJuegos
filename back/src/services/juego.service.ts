@@ -51,4 +51,13 @@ export class JuegoService {
       return await this.juegoRepository.eliminarJuego(id);
     }
 
+    async modificarJuego(id:number, data) {
+      const juego = this.juegoRepository.findJuegoById(id);
+      if(!juego){
+        throw new Error("Juego no encontrado por ID");
+      }
+
+      return await this.juegoRepository.modificarJuego(id, data)
+    }
+
 }

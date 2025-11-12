@@ -11,5 +11,7 @@ juegoRouter.get("/genero/:genero",juegoController.getJuegosPorGenero.bind(juegoC
 juegoRouter.get("/new/nuevos",juegoController.getJuegosNuevos.bind(juegoController));// este no va es para probar
 juegoRouter.post("/agregar", juegoController.agregarJuego.bind(juegoController));
 juegoRouter.delete("/eliminar/:id", juegoController.eliminarJuego.bind(juegoController));
+juegoRouter.put("/modificar/:id", juegoController.modificarJuego.bind(juegoController));
+
 
 export default juegoRouter;

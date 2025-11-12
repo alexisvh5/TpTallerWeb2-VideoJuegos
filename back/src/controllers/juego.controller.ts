@@ -96,4 +96,18 @@ export class JuegoController {
     }
   }
 
+  async modificarJuego(req: Request, res: Response){
+    try{
+      const id = Number(req.params.id);
+      if(isNaN(id)){
+        return  res.status(400).json({message:"Id inválido"});
+      }
+
+      const juegoModificado = await juegoService.modificarJuego(id, req.body);
+      res.status(200).json({message:"Juego modificado correctamente", juego: juegoModificado});
+    } catch(error:any){
+      res.status(500).json({error: error.message});
+    }
+  }
+
 }

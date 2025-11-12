@@ -58,4 +58,10 @@ export class JuegoRepository {
       where:{id}
     })
   }
+
+  async modificarJuego(id:number, data: {nombre?:string, anio?:number, descripcion?:string, desarrollador?:string, precio?:number}){
+    return await prisma.juego.update({
+      where:{id},data
+    })
+  }
 }
