@@ -1,4 +1,4 @@
-<div class="container-fluid overflow-hidden">
+<!-- <div class="container-fluid overflow-hidden">
     <div class="row vh-100 overflow-auto">
         <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
             <div
@@ -53,4 +53,21 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 10 L15 2 L30 10 L30 25 L15 33 L2 25 Z" fill="var(--primary-color)" />
+    </svg>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <div class="flex items-center gap-2">
+      <input type="text" pInputText placeholder="Buscar" class="w-36" />
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+    </div>
+  </ng-template>
+</p-menubar>
+<router-outlet></router-outlet>
