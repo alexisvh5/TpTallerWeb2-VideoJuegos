@@ -19,7 +19,7 @@
         <p>{{ juego.descripcion }}</p>
         <div class="card-actions">
           <p-button icon="pi pi-pencil" severity="warn" />
-          <p-button icon="pi pi-trash" severity="danger" />
+          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"/>
         </div>
       </div>
     }

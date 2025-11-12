@@ -31,4 +31,8 @@ export class JuegoService {
   agregarJuego(juego:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/agregar`, juego)
   }
+
+  eliminarJuego(id:number): Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}/eliminar/${id}`);
+  }
 }

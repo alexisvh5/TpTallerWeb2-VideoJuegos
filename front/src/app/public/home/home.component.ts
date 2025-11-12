@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { JuegoService } from '../../api/services/juego/juego.service';
 import { Button } from "primeng/button";
 
@@ -11,9 +11,11 @@ import { Button } from "primeng/button";
 })
 export class HomeComponent implements OnInit{
   private juegoService = inject(JuegoService);
+  private router = inject(Router)
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
+
 
   ngOnInit(): void {
     this.juegoService.getAll().subscribe({
@@ -24,6 +26,18 @@ export class HomeComponent implements OnInit{
       error: (err) => {
         this.error = "Error al cargar los juegos.";
         this.cargando = false;
+        console.error(err);
+      }
+    })
+  }
+
+  eliminarJuego(id:number){
+    this.juegoService.eliminarJuego(id).subscribe({
+      next: (res) => {
+        // this.router.navigate(['/home']).then(() => { window.location.reload(); });
+        window.location.reload();
+      },
+      error: (err)=> {
         console.error(err);
       }
     })
