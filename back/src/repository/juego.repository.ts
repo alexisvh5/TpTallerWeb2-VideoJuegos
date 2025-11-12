@@ -52,4 +52,10 @@ export class JuegoRepository {
   async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number}){
     return await prisma.juego.create({data});
   }
+
+  async eliminarJuego(id:number){
+    return await prisma.juego.delete({
+      where:{id}
+    })
+  }
 }

@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { JuegoService } from '../../api/services/juego/juego.service';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Button],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

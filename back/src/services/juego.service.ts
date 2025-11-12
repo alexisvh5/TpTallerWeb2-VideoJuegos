@@ -43,5 +43,12 @@ export class JuegoService {
       });
     }
 
+    async eliminarJuego(id:number){
+      const juego = this.juegoRepository.findJuegoById(id);
+      if(!juego){
+        throw new Error("Juego no encontrado por ID");
+      }
+      return await this.juegoRepository.eliminarJuego(id);
+    }
 
 }
