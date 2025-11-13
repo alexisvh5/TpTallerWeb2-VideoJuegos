@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit{
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
-<<<<<<< HEAD
+
   usuario: any;
-=======
+
   apiUrl = 'http://localhost:3000';
   responsiveOptions: any[] = [
     {
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit{
     }
   ];
 
->>>>>>> 7e64b347d9f80c5585069491b8e3a7b1de78fd16
+
 
   ngOnInit(): void {
 
