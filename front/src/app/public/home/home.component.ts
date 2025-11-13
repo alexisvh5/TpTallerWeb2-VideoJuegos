@@ -4,6 +4,7 @@ import { JuegoService } from '../../api/services/juego/juego.service';
 import { Button } from "primeng/button";
 import { Carousel } from "primeng/carousel";
 import { CarritoService } from '../../api/services/carrito/carrito.service';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit{
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
-  apiUrl = 'http://localhost:3000';
+  private apiBaseUrl = environment.api_url.replace('/api', '');
   responsiveOptions: any[] = [
     {
       breakpoint: '1400px',
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit{
       next: (res) => {
         this.juegos = res.map((juego: any) => ({
           ...juego,
-          imagen_url: this.apiUrl + juego.imagen_url
+          imagen_url: this.construirUrlImagen(juego.imagen_url)
         }));
         this.cargando = false;
       },
@@ -58,6 +59,15 @@ export class HomeComponent implements OnInit{
         console.error(err);
       }
     })
+  }
+
+  private construirUrlImagen(rutaRelativa: string): string {
+    // Si la URL ya tiene protocolo, usarla como está
+    if (rutaRelativa?.startsWith('http')) {
+      return rutaRelativa;
+    }
+    // Si no tiene protocolo, construir URL relativa desde el servidor backend
+    return `${this.apiBaseUrl}${rutaRelativa}`;
   }
 
   eliminarJuego(id:number){
