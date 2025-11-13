@@ -6,9 +6,19 @@
   </ng-template>
 
   <ng-template pTemplate="end">
-    <div class="flex items-center gap-2">
-      <input type="text" pInputText placeholder="Buscar juego" class="w-36" pInputText [(ngModel)]="searchTerm" (input)="onSearchChange()"/>
-    </div>
+    <form (ngSubmit)="buscarJuego()" class="flex items-center gap-2">
+      <input
+        type="text"
+        pInputText
+        placeholder="Buscar juego..."
+        class="w-40"
+        name="searchTerm"
+        [(ngModel)]="searchTerm"
+      />
+      <button type="submit" class="p-button p-component p-button-sm">
+        <i class="pi pi-search"></i>
+      </button>
+    </form>
   </ng-template>
 </p-menubar>
 <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment.development";
 import { Observable } from "rxjs";
@@ -40,6 +40,9 @@ export class JuegoService {
     return this.http.put<any>(`${this.apiUrl}/modificar/${id}`, data);
   }
 
-  // buscarPorNombre()
+  buscarPorNombre(nombre:string): Observable<any>{
+    const params = new HttpParams().set('nombre', nombre)
+    return this.http.get<any>(`${this.apiUrl}/buscar`,{params});
+  }
 }
 

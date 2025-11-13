@@ -8,12 +8,11 @@ import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { AdminGuard } from '../../api/guards/admin.guard';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { JuegoService } from '../../api/services/juego/juego.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
-  imports: [MenubarModule, InputTextModule, AvatarModule, RouterOutlet],
+  imports: [MenubarModule, InputTextModule, AvatarModule, RouterOutlet, FormsModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
@@ -23,10 +22,6 @@ export class MenuComponent implements OnInit {
   router = inject(Router);
   adminGuard = inject(AutenticacionService);
   searchTerm: string = '';
-  juegosFiltrados = [];
-  juegoService = inject(JuegoService);
-
-  private searchSubject = new Subject<string>();
 
 
   ngOnInit() {
@@ -35,7 +30,6 @@ export class MenuComponent implements OnInit {
       { label: 'Ofertas', icon: 'pi pi-percentage', command: () => alert('Ofertas próximamente') },
     ];
 
-    // 👇 Si el usuario es admin, agregamos la opción extra
     const usuarioData = localStorage.getItem('USUARIO');
     if (usuarioData) {
       const usuario = JSON.parse(usuarioData);
@@ -65,33 +59,15 @@ export class MenuComponent implements OnInit {
         command: () => this.logout()
       }
     ];
-
-    this.searchSubject.pipe(
-      debounceTime(300), // espera 300ms tras dejar de escribir
-      distinctUntilChanged()
-    ).subscribe((term) => this.buscarJuegos(term));
   }
 
-  onSearchChange() {
-    this.searchSubject.next(this.searchTerm);
-  }
-
-  buscarJuegos(term: string) {
-    if (!term.trim()) {
-      this.juegosFiltrados = [];
-      return;
+  buscarJuego() {
+    if (this.searchTerm.trim()) {
+      this.router.navigate(['juego/buscar', this.searchTerm.trim()]);
+      this.searchTerm = ''; // limpiar input
     }
-
-    this.juegoService.buscarPorNombre(term).subscribe({
-      next: (juegos) => {
-        this.juegosFiltrados = juegos;
-        console.log('Resultados:', juegos);
-      },
-      error: (err) => console.error(err)
-    });
-
-
   }
+
 
   logout() {
     localStorage.removeItem('USUARIO');
