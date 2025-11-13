@@ -1,25 +1,85 @@
 <form [formGroup]="form" (ngSubmit)="signUp()">
 
-<h2>Crear Cuenta</h2>
-<div style="display: flex; flex-direction: column;width: 30%;">
+  <h2>CREAR CUENTA</h2>
 
-  <label for="">Nombre: </label>
-  <input type="text" placeholder="Nombre" formControlName="nombre">
-  <label for="">Apellido: </label>
-  <input type="text" placeholder="Apellido" formControlName="apellido">
-  <label for="">Direccion: </label>
-  <input type="text" placeholder="Dirección" formControlName="direccion">
-  <label for="">Email: </label>
-  <input type="email" placeholder="Email" formControlName="email">
-  <label for="">Contraseña: </label>
-  <input type="password" placeholder="Contraseña" formControlName="contrasenia">
-  <button type="submit">Registrarse</button>
-  @if(error) {
-    <p style="color:red">{{ error }}</p>
-  } @else {
-    <p style="color:green">{{ exito }}</p>
-  }
+  <div style="display: flex; flex-direction: column; width: 30%;">
 
-</div>
-  <p>Ya tenes una cuenta existente? <a [routerLink]="['/login']" >Iniciar sesión</a></p>
+    <!-- NOMBRE -->
+    <label>Nombre:</label>
+    <input type="text" placeholder="Nombre" formControlName="nombre">
+
+    @if (form.get('nombre')?.hasError('required') && (form.get('nombre')?.touched || submitted)) {
+      <p style="color:red">El nombre es obligatorio.</p>
+    }
+
+    <!-- APELLIDO -->
+    <label>Apellido:</label>
+    <input type="text" placeholder="Apellido" formControlName="apellido">
+
+    @if (form.get('apellido')?.hasError('required') && (form.get('apellido')?.touched || submitted)) {
+      <p style="color:red">El apellido es obligatorio.</p>
+    }
+
+    <!-- DIRECCION -->
+    <label>Dirección:</label>
+    <input type="text" placeholder="Dirección" formControlName="direccion">
+
+    @if (form.get('direccion')?.hasError('required') && (form.get('direccion')?.touched || submitted)) {
+      <p style="color:red">La dirección es obligatoria.</p>
+    }
+
+    <!-- EMAIL -->
+    <label>Email:</label>
+    <input type="email" placeholder="Email" formControlName="email">
+
+    @if (form.get('email')?.errors && (form.get('email')?.touched || submitted)) {
+
+      @if (form.get('email')?.hasError('required')) {
+        <p style="color:red">El email es obligatorio.</p>
+      }
+
+      @if (form.get('email')?.hasError('email')) {
+        <p style="color:red">Formato de email inválido.</p>
+      }
+    }
+
+    <!-- CONTRASEÑA -->
+    <label>Contraseña:</label>
+    <input type="password" placeholder="Contraseña" formControlName="contrasenia">
+
+    @if (form.get('contrasenia')?.errors && (form.get('contrasenia')?.touched || submitted)) {
+
+      @if (form.get('contrasenia')?.hasError('required')) {
+        <p style="color:red">La contraseña es obligatoria.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('minlength')) {
+        <p style="color:red">La contraseña debe tener al menos 6 caracteres.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('uppercase')) {
+        <p style="color:red">La contraseña debe incluir al menos una mayúscula.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('number')) {
+        <p style="color:red">La contraseña debe incluir al menos un número.</p>
+      }
+    }
+
+    <!-- BUTTON -->
+    <button type="submit">Registrarse</button>
+
+    <!-- MENSAJES DEL BACKEND -->
+    @if (error) {
+      <p style="color:red">{{ error }}</p>
+    }
+
+    @if (exito) {
+      <p style="color:green">{{ exito }}</p>
+    }
+
+  </div>
+
+  <p>¿Ya tenes una cuenta existente? <a [routerLink]="['/login']">Iniciar sesión</a></p>
+
 </form>
