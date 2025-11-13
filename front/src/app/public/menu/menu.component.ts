@@ -54,6 +54,11 @@ export class MenuComponent implements OnInit {
         items: juegosItems
       },
       {
+      label: 'Carrito',
+      icon: 'pi pi-shopping-cart',
+      command: () => this.router.navigate(['/carrito'])
+      },
+      {
         label: 'Salir',
         icon: 'pi pi-sign-out',
         command: () => this.logout()

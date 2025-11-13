@@ -9,9 +9,10 @@
     <div class="error">{{ error }}</div>
   }
 
-  <div class="grid">
-    @for(juego of juegos; track juego.id){
+  <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
+    <ng-template #item let-juego>
       <div class="card">
+<<<<<<< HEAD
         <h2>{{ juego.nombre }}</h2>
         <p><strong>Año:</strong> {{ juego.anio }}</p>
         <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
@@ -23,8 +24,25 @@
             <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)" />
           </div>
         }
+=======
+        <div class="card-image-container">
+          <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image"/>
+        </div>
+        <div class="card-content">
+          <h2>{{ juego.nombre }}</h2>
+          <p><strong>Año:</strong> {{ juego.anio }}</p>
+          <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
+          <p><strong>Categoria:</strong> {{ juego.categoria }}</p>
+          <p><strong>Precio:</strong> {{ juego.precio }}</p>
+          <p>{{ juego.descripcion }}</p>
+        </div>
+        <div class="card-actions">
+          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"/>
+          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"/>
+          <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"/>
+        </div>
+>>>>>>> 7e64b347d9f80c5585069491b8e3a7b1de78fd16
       </div>
-    }
-
-  </div>
+    </ng-template>
+  </p-carousel>
 </div>

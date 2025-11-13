@@ -3,9 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crud-empleados-front": {
+    "crud-juegos-front": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": { "type": "component" },
+        "@schematics/angular:directive": { "type": "directive" },
+        "@schematics/angular:service": { "type": "service" },
+        "@schematics/angular:guard": { "typeSeparator": "." },
+        "@schematics/angular:interceptor": { "typeSeparator": "." },
+        "@schematics/angular:module": { "typeSeparator": "." },
+        "@schematics/angular:pipe": { "typeSeparator": "." },
+        "@schematics/angular:resolver": { "typeSeparator": "." }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -56,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "crud-empleados-front:build:production"
+              "buildTarget": "crud-juegos-front:build:production"
             },
             "development": {
-              "buildTarget": "crud-empleados-front:build:development"
+              "buildTarget": "crud-juegos-front:build:development"
             }
           },
           "defaultConfiguration": "development"

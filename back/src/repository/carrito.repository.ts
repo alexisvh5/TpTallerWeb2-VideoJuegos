@@ -9,8 +9,11 @@ export class CarritoRepository {
   }
 
   async agregarJuego(idUsuario: number, idJuego: number) {
-    const carrito = await prisma.carrito.findUnique({ where: { idUsuario } });
-    if (!carrito) throw new Error("Carrito no encontrado");
+    let carrito = await prisma.carrito.findUnique({ where: { idUsuario } });
+    
+    if (!carrito) {
+      carrito = await prisma.carrito.create({ data: { idUsuario } });
+    }
 
     return await prisma.carritoJuego.create({
       data: {

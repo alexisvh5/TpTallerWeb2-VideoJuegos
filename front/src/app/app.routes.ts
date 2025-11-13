@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './public/home/home.component';
 import { AuthGuard } from './api/guards/autenticacion.guard';
 import { NoAuthGuard } from './api/guards/noAutenticacion.guard';
+import { CarritoComponent } from './modules/carrito/carrito.component';
 
 
 export const routes: Routes = [
@@ -19,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'juego',
         loadChildren: () => import('./modules/juegos/juegos.routes').then(j => j.juegosRoutes)
+    },
+    {
+      path: 'carrito',
+      component: CarritoComponent
     },
     {
         path: '**',
