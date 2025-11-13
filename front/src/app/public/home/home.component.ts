@@ -7,6 +7,7 @@ import { CarritoService } from '../../api/services/carrito/carrito.service';
 import { environment } from '../../../environments/environment.development';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -21,6 +22,10 @@ export class HomeComponent implements OnInit{
   private juegoService = inject(JuegoService);
   private router = inject(Router);
   private messageService = inject(MessageService);
+  private httpClient = inject(HttpClient);
+
+  selectedFile: File | null = null;
+  uploadedImageUrl: string | null = null; // Para guardar la URL que devuelve el backend
 
   juegos:any[] = [];
   cargando:boolean = true;
@@ -67,11 +72,24 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  private construirUrlImagen(rutaRelativa: string): string {
-    if (rutaRelativa?.startsWith('http')) {
-      return rutaRelativa;
+  
+
+  public construirUrlImagen(rutaRelativa: string): string {
+    if (!rutaRelativa) {
+        return ''; 
     }
-    return `${this.apiBaseUrl}${rutaRelativa}`;
+    if (rutaRelativa.startsWith('http')) {
+        return rutaRelativa;
+    }
+    let rutaLimpia = rutaRelativa;
+    if (rutaLimpia.startsWith('/')) {
+        rutaLimpia = rutaLimpia.substring(1); 
+    }
+    if (rutaLimpia.startsWith('public/')) {
+        rutaLimpia = rutaLimpia.substring(7); 
+    }
+    // Usa backend_base_url aquí porque las imágenes se sirven desde la raíz del backend
+    return `${environment.backend_base_url}/public/${rutaLimpia}`; 
   }
 
   eliminarJuego(id:number){

@@ -56,7 +56,7 @@ export class JuegoRepository {
     });
   }
 
-  async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number}){
+  async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number,categoria:string,imagen_url:string}){
     return await prisma.juego.create({data});
   }
 

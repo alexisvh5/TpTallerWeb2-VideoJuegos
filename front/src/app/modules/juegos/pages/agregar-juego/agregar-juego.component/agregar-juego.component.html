@@ -13,6 +13,17 @@
   <input type="text" placeholder="Desarrollador del juego" formControlName="desarrollador">
   <label for="">Precio: </label>
   <input type="number" placeholder="Precio del juego" formControlName="precio">
+  <label for="">Categoria: </label>
+  <input type="text" placeholder="Categoria" formControlName="categoria">
+  <label for="">Cargar Imagen: </label>
+  <div class="upload-section">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    <button pButton label="Subir Imagen Ahora" (click)="uploadImage()" type="button">Vista Previa</button>
+      @if(uploadedImageUrl){
+        <p>URL de imagen subida (relativa): {{ uploadedImageUrl }}</p>
+      <img [src]="construirUrlImagen(uploadedImageUrl)" alt="Imagen subida" style="max-width: 200px; margin-top: 10px;">
+      }
+  </div>
   <button type="submit">Agregar Juego</button>
 
 </div>
