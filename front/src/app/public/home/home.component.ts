@@ -68,11 +68,9 @@ export class HomeComponent implements OnInit{
   }
 
   private construirUrlImagen(rutaRelativa: string): string {
-    // Si la URL ya tiene protocolo, usarla como está
     if (rutaRelativa?.startsWith('http')) {
       return rutaRelativa;
     }
-    // Si no tiene protocolo, construir URL relativa desde el servidor backend
     return `${this.apiBaseUrl}${rutaRelativa}`;
   }
 
