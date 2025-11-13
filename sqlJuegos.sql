@@ -5,9 +5,10 @@ CREATE TABLE "Juego" (
     "anio" INTEGER NOT NULL,
     "descripcion" TEXT,
     "desarrollador" VARCHAR(255),
-    "precio" DECIMAL(10, 2) NOT NULL DEFAULT 0.00 CHECK (precio >= 0)
+    "precio" DECIMAL(10, 2) NOT NULL DEFAULT 0.00 CHECK (precio >= 0),
+    "categoria" VARCHAR(100),
+    "imagen_url" VARCHAR(500)
 );
-
 CREATE TABLE "Genero" (
     "id" SERIAL PRIMARY KEY,
     "nombre" VARCHAR(100) NOT NULL UNIQUE
@@ -59,12 +60,27 @@ INSERT INTO "Genero" ("nombre") VALUES ('RPG'), ('ACCION'), ('AVENTURA'), ('ESTR
 -- los generos en mayuscula y sin tilde
 
 
-INSERT INTO "Juego" ("nombre", "anio", "descripcion", "desarrollador", "precio") VALUES
-('The Witcher 3: Wild Hunt', 2015, 'Un juego de rol de mundo abierto...', 'CD Projekt Red', 49.99),
-('God of War', 2018, 'Kratos se aventura en el mundo nórdico...', 'Santa Monica Studio', 59.99),
-('The Legend of Zelda: Breath of the Wild', 2017, 'Explora un vasto reino de Hyrule...', 'Nintendo', 59.99),
-('Age of Empires II', 1999, 'Juego de estrategia en tiempo real...', 'Ensemble Studios', 19.99),
-('Assassin s Creed Shadows', 2025, 'Assassin s Creed Shadows es un videojuego de acción-aventura de mundo abierto y sigilo', 'Ubisoft', 79.99);
+INSERT INTO "Juego" ("nombre", "anio", "descripcion", "desarrollador", "precio", "categoria", "imagen_url") VALUES
+('The Witcher 3: Wild Hunt', 2015, 'Un juego de rol de mundo abierto donde sigues la historia del brujo Geralt de Rivia.', 'CD Projekt Red', 49.99, 'RPG', '/public/images/juegos/the_witcher3.jpg'),
+('God of War', 2018, 'Kratos se aventura en el mundo nórdico con su hijo Atreus.', 'Santa Monica Studio', 59.99, 'Acción-Aventura', '/public/images/juegos/god_of_war.jpg'),
+('The Legend of Zelda: Breath of the Wild', 2017, 'Explora un vasto reino de Hyrule en un mundo abierto lleno de secretos.', 'Nintendo', 59.99, 'Aventura', '/public/images/juegos/zelda.jpg'),
+('Age of Empires II', 1999, 'Juego de estrategia en tiempo real con civilizaciones históricas.', 'Ensemble Studios', 19.99, 'Estrategia', '/public/images/juegos/age.jpg'),
+('Assassins Creed Shadows', 2025, 'Juego de acción-aventura ambientado en el Japón feudal.', 'Ubisoft', 79.99, 'Acción-Aventura', '/public/images/juegos/assassins_creed.jpg'),
+('Red Dead Redemption 2', 2018, 'Sigue a Arthur Morgan y la banda Van der Linde en el Salvaje Oeste.', 'Rockstar Games', 69.99, 'Acción-Aventura', '/public/images/juegos/red_dead.webp'),
+('Cyberpunk 2077', 2020, 'Explora Night City, una metrópolis futurista llena de crimen y tecnología.', 'CD Projekt Red', 59.99, 'RPG', '/public/images/juegos/cyberpunk.jpg'),
+('Elden Ring', 2022, 'Una épica aventura de mundo abierto creada por FromSoftware y George R.R. Martin.', 'FromSoftware', 69.99, 'RPG', '/public/images/juegos/elden_ring.jpg'),
+('Minecraft', 2011, 'Juego de construcción y supervivencia en un mundo de bloques infinitos.', 'Mojang', 26.95, 'Sandbox', '/public/images/juegos/minecraft.jpg'),
+('Overwatch 2', 2022, 'Shooter en equipos con héroes únicos y acción multijugador.', 'Blizzard Entertainment', 10.00, 'Shooter', '/public/images/juegos/overwatch2.jpg'),
+('FIFA 23', 2022, 'La entrega final de EA Sports FIFA con mejoras en jugabilidad y gráficos.', 'EA Sports', 59.99, 'Deportes', '/public/images/juegos/fifa23.jpg'),
+('Grand Theft Auto V', 2013, 'Explora Los Santos con tres protagonistas en una historia épica.', 'Rockstar Games', 29.99, 'Acción-Aventura', '/public/images/juegos/gtaV.jpg'),
+('Hollow Knight', 2017, 'Una aventura de acción y plataformas en el misterioso reino de Hallownest.', 'Team Cherry', 14.99, 'Metroidvania', '/public/images/juegos/hollow_knight.jpg'),
+('Dark Souls III', 2016, 'Enfréntate a enemigos desafiantes en un mundo oscuro y gótico.', 'FromSoftware', 49.99, 'RPG', '/public/images/juegos/dark_souls3.jpg'),
+('Resident Evil 4 Remake', 2023, 'Remake del clásico survival horror con gráficos y mecánicas actualizadas.', 'Capcom', 59.99, 'Terror', '/public/images/juegos/resident_evil4.webp'),
+('Super Mario Odyssey', 2017, 'Acompaña a Mario en una aventura por diferentes mundos para rescatar a Peach.', 'Nintendo', 49.99, 'Plataformas', '/public/images/juegos/super_mario.jpg'),
+('Horizon Forbidden West', 2022, 'Acompaña a Aloy en un viaje por tierras post-apocalípticas llenas de máquinas.', 'Guerrilla Games', 69.99, 'Acción-Aventura', '/public/images/juegos/horizon.jpg'),
+('Call of Duty: Modern Warfare III', 2023, 'Acción bélica intensa con campaña, multijugador y zombies.', 'Infinity Ward', 69.99, 'Shooter', '/public/images/juegos/cod_mw3.jpg'),
+('Baldurs Gate 3', 2023, 'Juego de rol basado en Dungeons & Dragons con libertad total de decisión.', 'Larian Studios', 69.99, 'RPG', '/public/images/juegos/baldurs_gate3.jpg'),
+('Spider-Man 2', 2023, 'Controla a Peter Parker y Miles Morales en esta aventura superheroica.', 'Insomniac Games', 69.99, 'Acción-Aventura', '/public/images/juegos/spiderman.png');
 
 -- Conectar géneros (Asumimos IDs 1-4 para juegos, 1-4 para géneros)
 INSERT INTO "_JuegoGenero" ("A", "B") VALUES 

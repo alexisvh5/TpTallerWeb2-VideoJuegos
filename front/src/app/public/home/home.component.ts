@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { JuegoService } from '../../api/services/juego/juego.service';
 import { Button } from "primeng/button";
+import { Carousel } from "primeng/carousel";
 import { CarritoService } from '../../api/services/carrito/carrito.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, Button],
+  imports: [Button, Carousel],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,12 +18,38 @@ export class HomeComponent implements OnInit{
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
+  apiUrl = 'http://localhost:3000';
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1400px',
+      numVisible: 5,
+      numScroll: 5
+    },
+    {
+      breakpoint: '1199px',
+      numVisible: 4,
+      numScroll: 4
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 2,
+      numScroll: 2
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+      numScroll: 1
+    }
+  ];
 
 
   ngOnInit(): void {
     this.juegoService.getAll().subscribe({
       next: (res) => {
-        this.juegos = res;
+        this.juegos = res.map((juego: any) => ({
+          ...juego,
+          imagen_url: this.apiUrl + juego.imagen_url
+        }));
         this.cargando = false;
       },
       error: (err) => {

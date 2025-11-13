@@ -46,10 +46,14 @@ model Juego {
   descripcion   String?
   desarrollador String?        @db.VarChar(255)
   precio        Decimal        @default(0.00) @db.Decimal(10, 2)
+  categoria     String?        @db.VarChar(100)
+  imagen_url    String?        @db.VarChar(500)
+
   ItemCompra    ItemCompra[]
   CarritoJuego  CarritoJuego[]
   JuegoGenero   JuegoGenero[]
 }
+
 
 model Usuario {
   id          Int      @id @default(autoincrement())
