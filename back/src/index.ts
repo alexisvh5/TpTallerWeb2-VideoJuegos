@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, {type Request, type Response} from "express";
 import { AppRoutes } from "./routes/routes.js";
 import cors from 'cors'

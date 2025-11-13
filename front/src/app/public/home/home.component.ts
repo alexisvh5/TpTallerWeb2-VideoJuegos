@@ -5,17 +5,23 @@ import { Button } from "primeng/button";
 import { Carousel } from "primeng/carousel";
 import { CarritoService } from '../../api/services/carrito/carrito.service';
 import { environment } from '../../../environments/environment.development';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-home',
-  imports: [Button, Carousel],
+  imports: [Button, ToastModule, Carousel],
+  providers: [MessageService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   private carritoService = inject(CarritoService);
   private juegoService = inject(JuegoService);
-  private router = inject(Router)
+  private router = inject(Router);
+  private messageService = inject(MessageService);
+
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
@@ -90,9 +96,20 @@ export class HomeComponent implements OnInit{
     const idUsuario = localStorage.getItem('USUARIO') ? JSON.parse(localStorage.getItem('USUARIO')!).id : null;
 
     this.carritoService.agregarJuego(idUsuario, idJuego).subscribe({
-    next: () => alert('Juego agregado al carrito'),
+    next: () => {
+      const juegoNombre = this.juegos.find(j => j.id === idJuego).nombre;
+      this.mostrarMensajeExito(juegoNombre);
+    },
     error: (err) => console.error(err),
   });
   }
 
+    mostrarMensajeExito(juegoNombre: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Juego agregado',
+      detail: `${juegoNombre} se añadió al carrito.`,
+      life: 3000
+    });
+  }
 }
