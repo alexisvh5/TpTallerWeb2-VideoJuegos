@@ -1,7 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment.development";
 import { Observable } from "rxjs";
+import { FiltrosJuego } from "../../../modules/juegos/interfaces/juego.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,25 @@ export class JuegoService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.api_url}/juego`;
 
-  getAll(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}`);
+  getAll(filtros : FiltrosJuego): Observable<any> {
+
+    let params = new HttpParams();
+
+    if (filtros.genero) {
+      params = params.set('genero', filtros.genero);
+    }
+    if (filtros.precioMin !== undefined) {
+      params = params.set('precioMin', filtros.precioMin.toString());
+    }
+    if (filtros.precioMax !== undefined) {
+      params = params.set('precioMax', filtros.precioMax.toString());
+    }
+
+    return this.http.get<any[]>(`${this.apiUrl}`, { params });
+  }
+
+  getGeneros(): Observable<any>{
+    return this.http.get<string>(`${this.apiUrl}/generos`);
   }
 
   getById(id:number): Observable<any>{
