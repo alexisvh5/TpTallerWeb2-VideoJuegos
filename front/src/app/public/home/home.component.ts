@@ -146,4 +146,9 @@ export class HomeComponent implements OnInit{
       life: 3000
     });
   }
+
+  verJuego(id:number){
+    this.router.navigate(['/juego', id])
+  }
+
 }

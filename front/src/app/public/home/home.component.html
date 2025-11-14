@@ -15,7 +15,7 @@
 
   <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
     <ng-template #item let-juego>
-      <div class="card">
+      <div class="card" (click)="verJuego(juego.id)">
 
         <div class="card-image-container">
           <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image"/>
