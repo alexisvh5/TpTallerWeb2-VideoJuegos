@@ -18,4 +18,9 @@ export class CompraService {
   comprarJuego(idUsuario:number, idJuego:number): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/adquirir`, {idUsuario, idJuego});
   }
+
+  comprarTodo(idUsuario: number) {
+  return this.http.post(`${this.apiUrl}/checkout`, { idUsuario });
+}
+
 }

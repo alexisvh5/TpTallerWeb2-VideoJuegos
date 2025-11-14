@@ -6,6 +6,7 @@ import { CurrencyPipe} from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { CompraService } from '../../api/services/compra/compra.service';
 
 @Component({
   selector: 'app-carrito',
@@ -19,6 +20,7 @@ export class CarritoComponent implements OnInit {
   carritoService = inject(CarritoService);
   idUsuario = localStorage.getItem('USUARIO') ? JSON.parse(localStorage.getItem('USUARIO')!).id : null;
   private messageService = inject(MessageService);
+  private compraService = inject(CompraService)
 
   ngOnInit(): void {this.cargarCarrito();}
 
@@ -85,4 +87,26 @@ export class CarritoComponent implements OnInit {
       life: 3000,
     });
   }
+
+  comprarTodo() {
+  if (!this.idUsuario) {
+    this.mostrarMensaje('warn', 'Iniciar sesión', 'Tenés que iniciar sesión para comprar.');
+    return;
+  }
+
+  if (this.carrito.length === 0) {
+    this.mostrarMensaje('warn', 'Carrito vacío', 'No hay juegos para comprar.');
+    return;
+  }
+
+  this.compraService.comprarTodo(this.idUsuario).subscribe({
+    next: (resp) => {
+      this.mostrarMensaje('success', 'Compra realizada', 'Todos los juegos del carrito fueron comprados.');
+      this.cargarCarrito(); // Limpia el carrito en la vista
+    },
+    error: (err) => {
+      this.mostrarMensaje('error', 'Error al comprar', err.error?.error || 'No se pudo completar la compra.');
+    }
+  });
+}
 }

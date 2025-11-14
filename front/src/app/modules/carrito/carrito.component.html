@@ -22,6 +22,13 @@
   @if(carrito.length > 0) {
         <p style="margin: 0.3rem 0; color: #e0e0e0; font-weight: 500; font-size: 1.5rem;">
       {{ totalItems }} {{ totalItems === 1 ? 'item' : 'items' }} | Total: {{ totalPrecio | currency }}
+      <p-button
+  icon="pi pi-credit-card"
+  label="Comprar todo"
+  (onClick)="comprarTodo()"
+  styleClass="p-button-success"
+></p-button>
+
     </p>
   <p-table [value]="carrito" styleClass="p-datatable-striped p-datatable-hoverable">
     <ng-template pTemplate="header">
