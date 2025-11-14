@@ -26,6 +26,10 @@ export const routes: Routes = [
       component: CarritoComponent
     },
     {
+      path: 'compras',
+      loadChildren: () => import('./modules/compras/compras.routes').then(c => c.comprasRoutes)
+    },
+    {
         path: '**',
         redirectTo: 'login'
     }

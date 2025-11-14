@@ -8,6 +8,7 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { MessageService } from 'primeng/api';
 import { ToastModule  } from "primeng/toast";
 import { PrimengSpinner } from '../../../../shared/components/primeng/primeng-spinner/primeng-spinner';
+import { CompraService } from '../../../../api/services/compra/compra.service';
 
 @Component({
   selector: 'app-juego-detail',
@@ -24,6 +25,7 @@ export class JuegoDetailComponent implements OnInit{
   private carritoService = inject(CarritoService);
   private messageService = inject(MessageService);
   private router = inject(Router);
+  private comprarService = inject(CompraService)
 
   juego: any = null;
   cargando = true;
@@ -60,9 +62,6 @@ volver() {
   this.location.back();
 }
 
-
-comprarAhora(){}
-
 agregarAlCarrito(idJuego: number) {
   if (!this.idUsuario) {
     this.messageService.add({
@@ -90,4 +89,38 @@ agregarAlCarrito(idJuego: number) {
     }
   });
 }
+
+
+comprarAhora() {
+  if (!this.idUsuario) {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Iniciar sesión',
+      detail: 'Tenés que iniciar sesión para comprar.'
+    });
+    return;
+  }
+
+  this.comprarService.comprarJuego(this.idUsuario, this.juego.id).subscribe({
+    next: (resp: any) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Compra realizada',
+        detail: `Compraste ${this.juego.nombre} con éxito.`
+      });
+
+      // Opcional: redirigir al usuario a sus compras
+      // this.router.navigate(['/compras/mis-compras']);
+    },
+    error: (err: any) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error al comprar',
+        detail: err.error?.error || 'No se pudo completar la compra.'
+      });
+    }
+  });
+}
+
+
 }

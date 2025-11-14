@@ -1,0 +1,39 @@
+@if (cargando) {
+  <p>Cargando compras...</p>
+} @else {
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @for (compra of compras; track compra.id) {
+    <div class="compra-card">
+
+      <h3>
+        Compra #{{ compra.id }} —
+        {{ compra.fecha }}
+      </h3>
+
+      <p>Total pagado: <strong>${{ compra.totalPagado }}</strong></p>
+
+      <div class="items">
+
+        @for (item of compra?.ItemCompra; track item.id) {
+          <div class="item">
+            <p><strong>{{ item.Juego?.nombre }}</strong></p>
+            <p>Precio al comprar: ${{ item.precioAlComprar }}</p>
+          </div>
+        } @empty {
+          <p>No hay items en esta compra.</p>
+        }
+
+      </div>
+
+      <hr />
+
+    </div>
+  } @empty {
+    <p>No tenés compras realizadas.</p>
+  }
+
+}
