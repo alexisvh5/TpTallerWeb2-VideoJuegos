@@ -105,6 +105,10 @@ INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia"
 INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia", "rol") VALUES
 ('Admin', 'Test', '-', 'Admin@test.com', '$2b$10$i4C5COxkl4LGP9FWkaJ4/.u18j7p3Z6e2QXYRIBBCZNdqer.j6xuC', 'ADMIN'),
 
+UPDATE "Usuario"
+SET "contrasenia" = '$2b$10$ZGfN5nXmIrC.enySJacWsu6wB8sjqvhh0YdI.p74Jf7.Y6LhcoxwW'
+WHERE email = 'Admin@test.com';
+
 -- ########## PASO 2: CREAR CARRITOS ##########
 INSERT INTO "Carrito" ("idUsuario") VALUES (1), (2);
 -- Asumimos Carrito Juan ID 1, Carrito Ana ID 2

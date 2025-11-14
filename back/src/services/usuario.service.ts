@@ -1,5 +1,5 @@
 import { UsuarioRepository } from "../repository/usuario.repository.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export class UsuarioService {
 
@@ -42,7 +42,6 @@ export class UsuarioService {
     let contraseniaValida = false;
 
     if (usuario.contrasenia.startsWith("$2")) {
-  // Contraseña hasheada
       contraseniaValida = await bcrypt.compare(contrasenia, usuario.contrasenia);
     } else {
       this.usuarioRepository.updatePasswordUsuario(usuario.id, await bcrypt.hash(contrasenia, 10));

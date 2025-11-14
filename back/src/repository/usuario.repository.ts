@@ -10,7 +10,7 @@ export class UsuarioRepository{
 
   async findAllUsuarios() {
     return await prisma.usuario.findMany({
-      select: { id: true, nombre: true, apellido: true, email: true, direccion: true, rol: true },
+      select: { id: true, nombre: true, apellido: true, email: true, direccion: true, rol: true},
     });
   }
 
