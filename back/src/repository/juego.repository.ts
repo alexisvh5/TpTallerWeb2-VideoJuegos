@@ -23,26 +23,33 @@ export class JuegoRepository {
   }
 
   async getJuegosPorGenero(genero: string) {
-    return await prisma.juego.findMany({
-      where: {
-        JuegoGenero: {
-          some: {
-            //buscar algun juego que tenga ese genero
-            Genero: {
-              nombre: genero,
-            },
+  return await prisma.juego.findMany({
+    where: {
+      JuegoGenero: {
+        some: {
+          Genero: {
+            nombre: genero,
           },
         },
       },
-      include: {
-        JuegoGenero: {
-          include: {
-            Genero: true,
-          },
+    },
+    select: {
+      id: true,
+      nombre: true,
+      anio: true,
+      descripcion: true,
+      desarrollador: true,
+      precio: true,
+      categoria: true,
+      imagen_url: true,
+      JuegoGenero: {
+        include: {
+          Genero: true,
         },
       },
-    });
-  }
+    },
+  });
+}
 
   async getJuegosNuevos() {
     const anioActual = new Date().getFullYear();
@@ -54,7 +61,7 @@ export class JuegoRepository {
     });
   }
 
-  async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number}){
+  async agregarJuego(data: {nombre:string, anio:number, descripcion:string, desarrollador:string, precio:number,categoria:string,imagen_url:string}){
     return await prisma.juego.create({data});
   }
 
@@ -64,11 +71,12 @@ export class JuegoRepository {
     })
   }
 
-  async modificarJuego(id:number, data: {nombre?:string, anio?:number, descripcion?:string, desarrollador?:string, precio?:number}){
-    return await prisma.juego.update({
-      where:{id},data
-    })
-  }
 
+  async modificarJuego(id:number, data: {nombre?:string, anio?:number, descripcion?:string, desarrollador?:string, precio?:number, imagen_url?:string, categoria?:string}){
+  return await prisma.juego.update({
+    where:{id},
+    data
+  })
+}
 
 }

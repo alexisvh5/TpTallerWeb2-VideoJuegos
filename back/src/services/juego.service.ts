@@ -29,7 +29,9 @@ export class JuegoService {
       anio:number,
       descripcion:string,
       desarrollador:string,
-      precio:number
+      precio:number,
+      categoria:string,
+      imagen_url:string
     }) {
       // Verificar que no exista el nombre
       const existente = await this.juegoRepository.findJuegoByNombre(data.nombre);
@@ -44,7 +46,7 @@ export class JuegoService {
     }
 
     async eliminarJuego(id:number){
-      const juego = this.juegoRepository.findJuegoById(id);
+      const juego = await this.juegoRepository.findJuegoById(id);
       if(!juego){
         throw new Error("Juego no encontrado por ID");
       }

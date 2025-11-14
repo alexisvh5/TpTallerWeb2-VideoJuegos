@@ -4,24 +4,40 @@ import { JuegoService } from '../../api/services/juego/juego.service';
 import { Button } from "primeng/button";
 import { Carousel } from "primeng/carousel";
 import { CarritoService } from '../../api/services/carrito/carrito.service';
+import { environment } from '../../../environments/environment.development';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
-  imports: [Button, Carousel],
+  imports: [Button, ToastModule, Carousel],
+  providers: [MessageService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   private carritoService = inject(CarritoService);
   private juegoService = inject(JuegoService);
-  private router = inject(Router)
+  private router = inject(Router);
+  private messageService = inject(MessageService);
+  private httpClient = inject(HttpClient);
+
+  selectedFile: File | null = null;
+  uploadedImageUrl: string | null = null; // Para guardar la URL que devuelve el backend
+
   juegos:any[] = [];
   cargando:boolean = true;
   error = '';
 
+
   usuario: any;
 
   apiUrl = 'http://localhost:3000';
+
+  private apiBaseUrl = environment.api_url.replace('/api', '');
+
   responsiveOptions: any[] = [
     {
       breakpoint: '1400px',
@@ -60,7 +76,7 @@ export class HomeComponent implements OnInit{
       next: (res) => {
         this.juegos = res.map((juego: any) => ({
           ...juego,
-          imagen_url: this.apiUrl + juego.imagen_url
+          imagen_url: this.construirUrlImagen(juego.imagen_url)
         }));
         this.cargando = false;
       },
@@ -72,6 +88,26 @@ export class HomeComponent implements OnInit{
     })
 
 
+  }
+
+
+
+  public construirUrlImagen(rutaRelativa: string): string {
+    if (!rutaRelativa) {
+        return '';
+    }
+    if (rutaRelativa.startsWith('http')) {
+        return rutaRelativa;
+    }
+    let rutaLimpia = rutaRelativa;
+    if (rutaLimpia.startsWith('/')) {
+        rutaLimpia = rutaLimpia.substring(1);
+    }
+    if (rutaLimpia.startsWith('public/')) {
+        rutaLimpia = rutaLimpia.substring(7);
+    }
+    // Usa backend_base_url aquí porque las imágenes se sirven desde la raíz del backend
+    return `${environment.backend_base_url}/public/${rutaLimpia}`;
   }
 
   eliminarJuego(id:number){
@@ -94,9 +130,20 @@ export class HomeComponent implements OnInit{
     const idUsuario = localStorage.getItem('USUARIO') ? JSON.parse(localStorage.getItem('USUARIO')!).id : null;
 
     this.carritoService.agregarJuego(idUsuario, idJuego).subscribe({
-    next: () => alert('Juego agregado al carrito'),
+    next: () => {
+      const juegoNombre = this.juegos.find(j => j.id === idJuego).nombre;
+      this.mostrarMensajeExito(juegoNombre);
+    },
     error: (err) => console.error(err),
   });
   }
 
+    mostrarMensajeExito(juegoNombre: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Juego agregado',
+      detail: `${juegoNombre} se añadió al carrito.`,
+      life: 3000
+    });
+  }
 }

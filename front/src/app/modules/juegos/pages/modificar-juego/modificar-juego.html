@@ -13,8 +13,19 @@
   <input type="text" placeholder="Desarrollador del juego" formControlName="desarrollador">
   <label for="">Precio: </label>
   <input type="number" placeholder="Precio del juego" formControlName="precio">
+  <label for="">Categoria: </label>
+  <input type="text" placeholder="Categoria" formControlName="categoria">
+ <label for="">Imagen actual: </label>
+  @if(currentImageUrl) {
+    <img [src]="currentImageUrl" alt="Imagen actual" style="max-width: 200px; margin-bottom: 15px;">
+  } @else {
+    <p>Este juego no tiene imagen.</p>
+  }
+ <label for="">Cambiar Imagen: </label>
+<div class="upload-section">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+</div>
   <button type="submit">Modificar Juego</button>
-
 </div>
 @if(error) {
   <p style="color:red">{{ error }}</p>

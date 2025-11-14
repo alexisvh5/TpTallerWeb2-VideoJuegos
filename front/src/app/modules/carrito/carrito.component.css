@@ -1,0 +1,172 @@
+.carrito-container {
+  min-height: 100vh;
+  padding: 2rem;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.carrito-container::before,
+.carrito-container::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.carrito-container::before {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1), transparent);
+  top: -150px;
+  right: -150px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.carrito-container::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.1), transparent);
+  bottom: -100px;
+  left: -100px;
+  animation: float 8s ease-in-out infinite 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.05); }
+}
+
+/* Header */
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.carrito-header h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+/* Botón Vaciar Carrito */
+.carrito-header ::ng-deep .p-button-danger {
+  background: linear-gradient(135deg, #ff4757, #dc143c) !important;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.carrito-header ::ng-deep .p-button-danger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,71,87,0.6);
+  background: linear-gradient(135deg, #ff5c6c, #ee3649) !important;
+}
+
+/* Tabla */
+p-table {
+  width: 100%;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  animation: slideIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+p-table:nth-child(1) { animation-delay: 0.1s; }
+p-table:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+p-table ::ng-deep .p-datatable-thead > tr > th {
+  background: rgba(138, 43, 226, 0.3);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem;
+}
+
+p-table ::ng-deep .p-datatable-tbody > tr > td {
+  color: #e0e0e0;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+p-table ::ng-deep .p-datatable-tbody > tr:hover {
+  background: rgba(138, 43, 226, 0.1);
+}
+
+/* Botones de eliminar dentro de la tabla */
+p-table ::ng-deep .p-button-danger {
+  background: linear-gradient(135deg, #ff4757, #dc143c) !important;
+  border-radius: 12px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+p-table ::ng-deep .p-button-danger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,71,87,0.6);
+  background: linear-gradient(135deg, #ff5c6c, #ee3649) !important;
+}
+
+/* Mensaje de carrito vacío */
+.carrito-empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #9d4edd;
+  text-shadow: 0 0 15px rgba(138,43,226,0.4);
+  border: 2px solid rgba(138,43,226,0.2);
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 600px;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carrito-container {
+    padding: 1.5rem;
+  }
+
+  .carrito-header h2 {
+    font-size: 1.5rem;
+  }
+
+  p-table ::ng-deep .p-datatable-thead > tr > th,
+  p-table ::ng-deep .p-datatable-tbody > tr > td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .carrito-header ::ng-deep .p-button-danger {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}
