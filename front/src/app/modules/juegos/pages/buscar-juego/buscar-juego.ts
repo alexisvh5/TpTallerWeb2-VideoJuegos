@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-buscar-juego',
@@ -38,6 +39,11 @@ export class BuscarJuego implements OnInit{
         this.juegos = [];
       }
 
+      this.juegos = this.juegos.map(j => ({
+          ...j,
+          imagen_url: this.fixUrl(j.imagen_url)
+        }));
+
       console.log('✅ Juegos normalizados:', this.juegos);
     },
     error: (err) => {
@@ -46,5 +52,12 @@ export class BuscarJuego implements OnInit{
     }
     });
   }
+
+  fixUrl(ruta: string) {
+  if (!ruta) return '';
+  let limpio = ruta.replace(/^\/+/, "");
+  return `${environment.backend_base_url}/${limpio}`;
+}
+
 
 }
