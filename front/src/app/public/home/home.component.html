@@ -1,59 +1,88 @@
 <p-toast position="top-right"></p-toast>
 <div class="home-container">
   <div class="card-header">
-    <a href="/carrito"><p-button icon="pi pi-shopping-cart" severity="success" label="Ver carrito"/></a>
+    <a href="/carrito"
+      ><p-button icon="pi pi-shopping-cart" severity="success" label="Ver carrito"
+    /></a>
   </div>
   <h1>Catálogo de Juegos</h1>
 
   @if (cargando) {
-    <div class="loading">Cargando juegos...</div>
-  }
-
-  @if(error) {
-    <div class="error">{{ error }}</div>
+  <div class="loading">Cargando juegos...</div>
+  } @if(error) {
+  <div class="error">{{ error }}</div>
   }
 
   <div class="filtros-wrapper">
-  <p-card header="Filtros" class="card-filtros mb-5">
-  <div class="filtros-container" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: start;">
-    <p-select [options]="generos" [(ngModel)]="filtros.genero" placeholder="Seleccionar genero" class="w-full md:w-56" />
-    <div class="filtro-precio">
-    <p>Precio: {{priceRange[0]}} - {{priceRange[1]}}</p>
+    <p-card header="Filtros" class="card-filtros mb-5">
+      <div
+        class="filtros-container"
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          align-items: center;
+          justify-content: start;
+        "
+      >
+        <div class="campo-genero">
+          <label class="label-filtro">Género</label>
+          <p-select
+            [options]="generos"
+            [(ngModel)]="filtros.genero"
+            placeholder="Seleccionar género"
+            class="w-full md:w-56"
+          >
+          </p-select>
+        </div>
 
-    <p-slider
-      [(ngModel)]="priceRange"
-      [min]="minPrice"
-      [max]="maxPrice"
-      [range]="true"
-      [style]="{'width':'300px'}"
-      (onChange)="actualizarFiltrosPrecio()">
-    </p-slider>
-    </div>
+        <div class="filtro-precio">
+          <p>Precio: {{ priceRange[0] }} - {{ priceRange[1] }}</p>
 
-    <!-- Botón aplicar filtros -->
-    <p-button
-      label="Aplicar filtros"
-      icon="pi pi-filter"
-      (onClick)="aplicarFiltros()"
-      class="mt-2 md:mt-0">
-    </p-button>
+          <p-slider
+            [(ngModel)]="priceRange"
+            [min]="minPrice"
+            [max]="maxPrice"
+            [range]="true"
+            [style]="{ width: '300px' }"
+            (onChange)="actualizarFiltrosPrecio()"
+          >
+          </p-slider>
+        </div>
 
-    <!-- Botón limpiar filtros -->
-    <p-button
-      label="Limpiar filtros"
-      icon="pi pi-times"
-      (onClick)="limpiarFiltros()"
-      class="mt-2 md:mt-0 p-button-secondary">
-    </p-button>
+        <!-- Botón aplicar filtros -->
+        <p-button
+          label="Aplicar filtros"
+          icon="pi pi-filter"
+          (onClick)="aplicarFiltros()"
+          class="mt-2 md:mt-0"
+        >
+        </p-button>
+
+        <!-- Botón limpiar filtros -->
+        <p-button
+          label="Limpiar filtros"
+          icon="pi pi-times"
+          (onClick)="limpiarFiltros()"
+          class="mt-2 md:mt-0 p-button-secondary"
+        >
+        </p-button>
+      </div>
+    </p-card>
   </div>
-  </p-card>
-  </div>
 
-  <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
+  <p-carousel
+    [value]="juegos"
+    [numVisible]="5"
+    [numScroll]="5"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+    [showIndicators]="true"
+  >
     <ng-template #item let-juego>
       <div class="card">
         <div class="card-image-container">
-          <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image"/>
+          <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image" />
         </div>
         <div class="card-content">
           <h2>{{ juego.nombre }}</h2>
@@ -64,9 +93,13 @@
           <p>{{ juego.descripcion }}</p>
         </div>
         <div class="card-actions">
-          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"/>
-          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"/>
-          <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"/>
+          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)" />
+          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)" />
+          <p-button
+            icon="pi pi-shopping-cart"
+            severity="success"
+            (onClick)="agregarAlCarrito(juego.id)"
+          />
         </div>
       </div>
     </ng-template>

@@ -555,3 +555,15 @@
   display: flex;
   justify-content: center;
 }
+.label-filtro {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.campo-genero,
+.filtro-precio {
+  display: flex;
+  flex-direction: column;
+}
