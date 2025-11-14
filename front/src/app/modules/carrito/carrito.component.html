@@ -16,6 +16,7 @@
       label="Vaciar Carrito"
       (onClick)="vaciarCarrito()"
       styleClass="p-button-danger"
+      [disabled]="carrito.length === 0"
     ></p-button>
   </div>
 

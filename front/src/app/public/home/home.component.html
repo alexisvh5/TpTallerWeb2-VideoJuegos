@@ -18,15 +18,19 @@
 
   <!-- FILTROS -->
   <div class="filtros-wrapper">
-    <p-card header="Filtros" class="card-filtros mb-5">
-      <div class="filtros-container">
+    <p-card header="Filtros de búsqueda" class="card-filtros mb-5">
+      <div class="filtros-container" >
         <!-- Filtro género -->
-        <p-select
-          [options]="generos"
-          [(ngModel)]="filtros.genero"
-          placeholder="Seleccionar género"
-          class="w-full md:w-56">
-        </p-select>
+        <div class="campo-genero">
+          <label class="label-filtro">Género</label>
+          <p-select
+            [options]="generos"
+            [(ngModel)]="filtros.genero"
+            placeholder="Seleccionar género"
+            class="w-full md:w-56"
+          >
+          </p-select>
+        </div>
 
         <!-- Filtro precio -->
         <div class="filtro-precio">
