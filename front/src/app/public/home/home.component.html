@@ -37,7 +37,7 @@
         </div>
 
         <div class="filtro-precio">
-          <p>Precio: {{ priceRange[0] }} - {{ priceRange[1] }}</p>
+          <p>Precio: {{ priceRange[0] | currency:'USD':'symbol':'1.0-0'}} - {{ priceRange[1] | currency:'USD':'symbol':'1.0-0'}}</p>
 
           <p-slider
             [(ngModel)]="priceRange"

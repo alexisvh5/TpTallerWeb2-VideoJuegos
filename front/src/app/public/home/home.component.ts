@@ -15,6 +15,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
 import { CardModule } from 'primeng/card';
 import { SliderModule } from 'primeng/slider';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ import { SliderModule } from 'primeng/slider';
     InputNumberModule,
     SelectModule,
     CardModule,
-    SliderModule
+    SliderModule,
+    CurrencyPipe
   ],
   providers: [MessageService],
   templateUrl: './home.component.html',
@@ -78,11 +80,11 @@ export class HomeComponent implements OnInit {
     precioMax: undefined,
   };
 
-  // Valores iniciales del slider
-  priceRange: number[] = [1, 150]; // [precioMin, precioMax]
+  // Rango de valores que acepta el slider
   minPrice: number = 0;
   maxPrice: number = 150;
 
+  priceRange: number[] = [this.minPrice, this.maxPrice]; // Rango elegido por el usuario
 
   actualizarFiltrosPrecio() {
     this.filtros.precioMin = this.priceRange[0];
@@ -168,6 +170,8 @@ export class HomeComponent implements OnInit {
       precioMin: undefined,
       precioMax: undefined,
     };
+
+    this.priceRange = [this.minPrice, this.maxPrice];
     this.cargarJuegos();
   }
 
