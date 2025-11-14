@@ -26,9 +26,25 @@ export class CompraRepository {
         });
     }
 
-    async getAll(id:number){
+    async getAll(){
         return await prisma.compra.findMany({
             include: {ItemCompra: true}
         })
+    }
+
+    async getComprasByUsuario(idUsuario:number){
+        return await prisma.compra.findMany({
+            where: {idUsuario},
+            include: {
+                ItemCompra: {
+                    include: {
+                        Juego: true
+                    }
+                }
+            },
+            orderBy: {
+                fecha: 'desc'
+            }
+        });
     }
 }
