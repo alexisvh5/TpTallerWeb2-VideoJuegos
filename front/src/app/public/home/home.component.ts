@@ -8,11 +8,12 @@ import { environment } from '../../../environments/environment.development';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { PrimengSpinner } from '../../shared/components/primeng/primeng-spinner/primeng-spinner';
 
 
 @Component({
   selector: 'app-home',
-  imports: [Button, ToastModule, Carousel],
+  imports: [Button, ToastModule, Carousel, PrimengSpinner],
   providers: [MessageService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

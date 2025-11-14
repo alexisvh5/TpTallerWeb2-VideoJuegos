@@ -7,10 +7,11 @@ import { Location } from '@angular/common';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule  } from "primeng/toast";
+import { PrimengSpinner } from '../../../../shared/components/primeng/primeng-spinner/primeng-spinner';
 
 @Component({
   selector: 'app-juego-detail',
-  imports: [FormsModule, ToastModule ],
+  imports: [FormsModule, ToastModule, PrimengSpinner],
   templateUrl: './juego-detail.component.html',
   styleUrl: './juego-detail.component.css',
   providers: [MessageService]

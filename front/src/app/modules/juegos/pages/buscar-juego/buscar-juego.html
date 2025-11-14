@@ -49,16 +49,14 @@
     <div class="juegos-container">
 
       @for (juego of juegos; track $index) {
-        <div class="juego-card">
+        <div class="juego-card" (click)="verJuego(juego.id)" >
 
-          <!-- INFORMACIÓN DEL JUEGO -->
           <div class="juego-info">
             <h3>{{ juego.nombre }}</h3>
             <p>{{ juego.descripcion }}</p>
             <small>Año: {{ juego.anio }} | Desarrollador: {{ juego.desarrollador }}</small>
           </div>
 
-          <!-- IMAGEN DEL JUEGO -->
           <div class="juego-imagen">
             <img [src]="juego.imagen_url" [alt]="juego.nombre" />
           </div>

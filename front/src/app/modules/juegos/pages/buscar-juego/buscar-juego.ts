@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JuegoService } from '../../../../api/services/juego/juego.service';
 import { environment } from '../../../../../environments/environment.development';
 
@@ -15,6 +15,7 @@ export class BuscarJuego implements OnInit{
   juegos: any[] = [];
   route = inject(ActivatedRoute);
   juegoService = inject(JuegoService);
+  router = inject(Router);
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -59,5 +60,8 @@ export class BuscarJuego implements OnInit{
   return `${environment.backend_base_url}/${limpio}`;
 }
 
+verJuego(id:number){
+  this.router.navigate(['/juego', id])
+}
 
 }
