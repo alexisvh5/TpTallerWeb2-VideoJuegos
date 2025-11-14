@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     const juegosItems: any[] = [
-      { label: 'Lista de juegos', icon: 'pi pi-list', command: () => this.router.navigate(['/home']) },
+      { label: 'Lista de juegos', icon: 'pi pi-list', command: () => this.router.navigate(['/']) },
       { label: 'Ofertas', icon: 'pi pi-percentage', command: () => alert('Ofertas próximamente') },
     ];
 
@@ -59,6 +59,11 @@ export class MenuComponent implements OnInit {
       command: () => this.router.navigate(['/carrito'])
       },
       {
+      label: 'Mis compras',
+      icon: 'pi pi-check-circle',
+      command: () => this.router.navigate(['compras/mis-compras'])
+      },
+      {
         label: 'Salir',
         icon: 'pi pi-sign-out',
         command: () => this.logout()
@@ -69,7 +74,7 @@ export class MenuComponent implements OnInit {
   buscarJuego() {
     if (this.searchTerm.trim()) {
       this.router.navigate(['juego/buscar', this.searchTerm.trim()]);
-      this.searchTerm = ''; // limpiar input
+      this.searchTerm = '';
     }
   }
 

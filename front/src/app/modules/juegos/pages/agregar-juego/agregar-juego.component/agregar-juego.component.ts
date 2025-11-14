@@ -22,14 +22,14 @@ export class AgregarJuegoComponent {
   private jService = inject(JuegoService);
   private router = inject(Router);
 
-  private httpClient = inject(HttpClient); 
+  private httpClient = inject(HttpClient);
   private messageService = inject(MessageService);
 
   // Propiedades para la subida de imágenes
   selectedFile: File | null = null;
   uploadedImageUrl: string | null = null; // Para guardar la URL que devuelve el backend
-   
-  
+
+
 
   // Función para manejar la selección de archivo
   onFileSelected(event: any) {
@@ -75,7 +75,7 @@ export class AgregarJuegoComponent {
     //let imageUrlToSave: string | null = null;
     let imageUrlToSave: any = null;
 
-    
+
     if(this.form.invalid){
           this.error = 'Todos los campos son obligatorios.';
           return;
@@ -90,10 +90,10 @@ export class AgregarJuegoComponent {
 
       const juegoParaGuardar = {
       ...this.form.value, // Trae nombre, anio, descripcion, etc.
-      
-      anio: +this.form.value.anio!, 
+
+      anio: +this.form.value.anio!,
       precio: +this.form.value.precio!,
-      
+
       imagen_url: this.uploadedImageUrl // Añade la URL de la imagen
     };
 
@@ -109,22 +109,22 @@ export class AgregarJuegoComponent {
     }
     public construirUrlImagen(rutaRelativa: string): string {
     if (!rutaRelativa) {
-        return ''; 
+        return '';
     }
     if (rutaRelativa.startsWith('http')) {
         return rutaRelativa;
     }
     let rutaLimpia = rutaRelativa;
     if (rutaLimpia.startsWith('/')) {
-        rutaLimpia = rutaLimpia.substring(1); 
+        rutaLimpia = rutaLimpia.substring(1);
     }
     if (rutaLimpia.startsWith('public/')) {
-        rutaLimpia = rutaLimpia.substring(7); 
+        rutaLimpia = rutaLimpia.substring(7);
     }
     // Usa backend_base_url aquí porque las imágenes se sirven desde la raíz del backend
-    return `${environment.backend_base_url}/public/${rutaLimpia}`; 
+    return `${environment.backend_base_url}/public/${rutaLimpia}`;
   }
-    
+
 
 
 }

@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CompraService } from '../../../../api/services/compra/compra.service';
 import { AutenticacionService } from '../../../../api/services/autenticacion/autenticacion.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../../environments/environment.development';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-compras-usuario',
@@ -15,6 +17,7 @@ export class ComprasUsuarioComponent implements OnInit{
   compras:any[] = [];
   cargando = true;
   error = "";
+  router = inject(Router)
 
   authService = inject(AutenticacionService);
 
@@ -44,5 +47,15 @@ export class ComprasUsuarioComponent implements OnInit{
   });
 }
 
+fixUrl(ruta: string) {
+  if (!ruta) return '';
+
+  let limpio = ruta.replace(/^\/+/, ""); // quita barras al inicio
+  return `${environment.backend_base_url}/${limpio}`;
+}
+
+irAJuegos(){
+  this.router.navigate(['/'])
+}
 
 }

@@ -51,8 +51,7 @@ export class JuegoDetailComponent implements OnInit{
   fixUrl(ruta: string) {
   if (!ruta) return '';
 
-  // Siempre devolver la ruta absoluta servida por el backend
-  let limpio = ruta.replace(/^\/+/, ""); // quita barras al inicio
+  let limpio = ruta.replace(/^\/+/, "");
 
   return `${environment.backend_base_url}/${limpio}`;
 }
@@ -108,9 +107,6 @@ comprarAhora() {
         summary: 'Compra realizada',
         detail: `Compraste ${this.juego.nombre} con éxito.`
       });
-
-      // Opcional: redirigir al usuario a sus compras
-      // this.router.navigate(['/compras/mis-compras']);
     },
     error: (err: any) => {
       this.messageService.add({

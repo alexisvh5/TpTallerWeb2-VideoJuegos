@@ -28,13 +28,10 @@ export class BuscarJuego implements OnInit{
     this.juegoService.buscarPorNombre(this.nombreJuego).subscribe({
       next: (res) => {
        if (Array.isArray(res) && res.length > 0 && res[0].juegos) {
-        // Caso en el que la API devuelve [{ message: "...", juegos: [...] }]
         this.juegos = res[0].juegos;
       } else if (Array.isArray(res)) {
-        // Caso raro en el que devuelve directamente un array de juegos
         this.juegos = res;
       } else if (res && res.juegos) {
-        // Caso en que devuelve un solo objeto con juegos
         this.juegos = res.juegos;
       } else {
         this.juegos = [];
@@ -45,10 +42,10 @@ export class BuscarJuego implements OnInit{
           imagen_url: this.fixUrl(j.imagen_url)
         }));
 
-      console.log('✅ Juegos normalizados:', this.juegos);
+      console.log(' Juegos normalizados:', this.juegos);
     },
     error: (err) => {
-      console.error('❌ Error buscando juegos:', err);
+      console.error(' Error buscando juegos:', err);
       this.juegos = [];
     }
     });
