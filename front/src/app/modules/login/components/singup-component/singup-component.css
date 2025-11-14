@@ -59,7 +59,8 @@ form h2 {
   z-index: 1;
 }
 
-form > div {
+/* Caja del formulario */
+.form-box {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -98,7 +99,7 @@ form input {
   font-size: 1rem;
   transition: all 0.3s ease;
   outline: none;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 form input::placeholder {
@@ -112,6 +113,14 @@ form input:focus {
   transform: translateY(-2px);
 }
 
+/* Errores de campos */
+.field-error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Botón */
 form button {
   background: linear-gradient(135deg, #8a2be2, #5a189a);
   border: none;
@@ -156,6 +165,7 @@ form button:active {
   box-shadow: 0 3px 15px rgba(138, 43, 226, 0.5);
 }
 
+/* Texto "ya tenes cuenta" */
 form > p {
   color: #b0b0b0;
   text-align: center;
@@ -193,26 +203,23 @@ form > p a:hover::after {
   width: 100%;
 }
 
-/* Mensaje de error */
-form > p:has([style*="color:red"]),
-form > p:has([style*="color: red"]) {
+/* Mensajes del backend */
+.backend-error {
   background: rgba(220, 53, 69, 0.1);
   border: 1px solid rgba(220, 53, 69, 0.3);
   border-radius: 10px;
   padding: 12px 20px;
-  color: #ff6b6b !important;
+  color: #ff6b6b;
   margin-top: 1.5rem;
   animation: shake 0.5s ease;
 }
 
-/* Mensaje de éxito */
-form > p:has([style*="color:green"]),
-form > p:has([style*="color: green"]) {
+.backend-success {
   background: rgba(40, 167, 69, 0.1);
   border: 1px solid rgba(40, 167, 69, 0.3);
   border-radius: 10px;
   padding: 12px 20px;
-  color: #51cf66 !important;
+  color: #51cf66;
   margin-top: 1.5rem;
   animation: slideInUp 0.5s ease;
 }
@@ -240,38 +247,11 @@ form > p:has([style*="color: green"]) {
     font-size: 2rem;
   }
 
-  form > div {
-    padding: 2rem 1.5rem;
-    width: 100%;
-  }
-}
-.form-box {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-              inset 0 0 60px rgba(138, 43, 226, 0.1);
-  width: 450px;
-  max-width: 90%;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-}
-@media (max-width: 768px) {
-  form h2 {
-    font-size: 2rem;
-  }
-
   .form-box {
     padding: 2rem 1.5rem;
     width: 100%;
   }
 }
-
-/* Extra para celulares más chicos */
 @media (max-width: 480px) {
   form {
     padding: 12px;

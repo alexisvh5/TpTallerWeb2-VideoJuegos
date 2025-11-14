@@ -27,8 +27,11 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       error:(err)=>{
-        this.error = err.error.message;
-        alert('Error en el login: '+ this.error);
+     console.log('ERROR COMPLETO:', err);
+      console.log('BODY DEL ERROR:', err.error);
+
+      this.error = err.error?.message || err.error?.error || 'Error al iniciar sesión';
+      alert('Error en el login: ' + this.error);
       }
     })
   }

@@ -1,10 +1,12 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AutenticacionService } from '../../../../api/services/autenticacion/autenticacion.service';
 import { Router, RouterLink } from '@angular/router';
+import { AutenticacionService } from '../../../../api/services/autenticacion/autenticacion.service';
+import { passwordValidator } from '../../../../shared/password.validator';
 
 @Component({
   selector: 'app-singup-component',
+  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './singup-component.html',
   styleUrl: './singup-component.css',
@@ -13,6 +15,7 @@ export class SingupComponent {
 
   error = '';
   exito = '';
+  submitted = false;
 
   private fb = inject(FormBuilder);
   private auth = inject(AutenticacionService);
@@ -23,26 +26,33 @@ export class SingupComponent {
     apellido: ['', Validators.required],
     direccion: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    contrasenia: ['', [Validators.required, Validators.minLength(6)]],
+    contrasenia: ['', [Validators.required, passwordValidator]],
   });
 
+  signUp() {
 
-  signUp(){
-    if(this.form.invalid){
-      this.error = 'Todos los campos son obligatorios.';
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.error = '';
+      this.exito = '';
       return;
     }
 
     this.auth.registrarse(this.form.value).subscribe({
       next: (res) => {
+        this.error = '';
         this.exito = 'Registro exitoso. Redirigiendo al login...';
         setTimeout(() => this.router.navigate(['/login']), 1500);
       },
       error: (err) => {
-        this.error = err.error.message;
-        alert(this.error);
-      }
-    })
+        this.exito = '';
+        this.error = err.error?.message
+          || err.error?.error
+          || (typeof err.error === 'string' ? err.error : null)
+          || 'Error al registrarse';
+      },
+    });
   }
-
 }

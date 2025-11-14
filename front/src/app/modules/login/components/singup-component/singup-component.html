@@ -1,33 +1,86 @@
 <form [formGroup]="form" (ngSubmit)="signUp()">
 
-  <h2>Crear Cuenta</h2>
+  <h2>CREAR CUENTA</h2>
 
+  <!-- Caja principal del formulario -->
   <div class="form-box">
-    <label>Nombre: </label>
+
+    <!-- NOMBRE -->
+    <label>Nombre:</label>
     <input type="text" placeholder="Nombre" formControlName="nombre">
 
-    <label>Apellido: </label>
+    @if (form.get('nombre')?.hasError('required') && (form.get('nombre')?.touched || submitted)) {
+      <p class="field-error">El nombre es obligatorio.</p>
+    }
+
+    <!-- APELLIDO -->
+    <label>Apellido:</label>
     <input type="text" placeholder="Apellido" formControlName="apellido">
 
-    <label>Dirección: </label>
+    @if (form.get('apellido')?.hasError('required') && (form.get('apellido')?.touched || submitted)) {
+      <p class="field-error">El apellido es obligatorio.</p>
+    }
+
+    <!-- DIRECCION -->
+    <label>Dirección:</label>
     <input type="text" placeholder="Dirección" formControlName="direccion">
 
-    <label>Email: </label>
+    @if (form.get('direccion')?.hasError('required') && (form.get('direccion')?.touched || submitted)) {
+      <p class="field-error">La dirección es obligatoria.</p>
+    }
+
+    <!-- EMAIL -->
+    <label>Email:</label>
     <input type="email" placeholder="Email" formControlName="email">
 
-    <label>Contraseña: </label>
+    @if (form.get('email')?.errors && (form.get('email')?.touched || submitted)) {
+
+      @if (form.get('email')?.hasError('required')) {
+        <p class="field-error">El email es obligatorio.</p>
+      }
+
+      @if (form.get('email')?.hasError('email')) {
+        <p class="field-error">Formato de email inválido.</p>
+      }
+    }
+
+    <!-- CONTRASEÑA -->
+    <label>Contraseña:</label>
     <input type="password" placeholder="Contraseña" formControlName="contrasenia">
 
+    @if (form.get('contrasenia')?.errors && (form.get('contrasenia')?.touched || submitted)) {
+
+      @if (form.get('contrasenia')?.hasError('required')) {
+        <p class="field-error">La contraseña es obligatoria.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('minlength')) {
+        <p class="field-error">La contraseña debe tener al menos 6 caracteres.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('uppercase')) {
+        <p class="field-error">La contraseña debe incluir al menos una mayúscula.</p>
+      }
+
+      @if (form.get('contrasenia')?.hasError('number')) {
+        <p class="field-error">La contraseña debe incluir al menos un número.</p>
+      }
+    }
+
+    <!-- BUTTON -->
     <button type="submit">Registrarse</button>
 
-    @if(error) {
-      <p style="color:red">{{ error }}</p>
-    } @else {
-      <p style="color:green">{{ exito }}</p>
+    <!-- MENSAJES DEL BACKEND -->
+    @if (error) {
+      <p class="backend-error">{{ error }}</p>
     }
+
+    @if (exito) {
+      <p class="backend-success">{{ exito }}</p>
+    }
+
   </div>
 
-  <p>Ya tenes una cuenta existente?
-    <a [routerLink]="['/login']">Iniciar sesión</a>
-  </p>
+  <p>¿Ya tenes una cuenta existente? <a [routerLink]="['/login']">Iniciar sesión</a></p>
+
 </form>
