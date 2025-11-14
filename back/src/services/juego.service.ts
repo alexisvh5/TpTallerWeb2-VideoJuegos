@@ -3,8 +3,8 @@ import type { JuegoRepository } from "../repository/juego.repository.js";
 export class JuegoService {
   constructor(private juegoRepository: JuegoRepository) {}
 
-  async getAllJuegos() {
-    return await this.juegoRepository.findAllJuegos();
+  async getAllJuegos( { where }) {
+    return await this.juegoRepository.findAllJuegos( { where } );
   }
 
   async getJuegoById(id: number) {
@@ -13,6 +13,10 @@ export class JuegoService {
       throw new Error("Juego no encontrado");
     }
     return juego;
+  }
+
+  async getGeneros() {
+    return await this.juegoRepository.getGeneros();
   }
 
   async getJuegosPorGenero(genero:string) {

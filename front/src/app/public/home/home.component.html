@@ -1,38 +1,147 @@
 <p-toast position="top-right"></p-toast>
+
 <div class="home-container">
+
   <div class="card-header">
-    <a href="/carrito"><p-button icon="pi pi-shopping-cart" severity="success" label="Ver carrito"/></a>
+    <a href="/carrito"
+      ><p-button icon="pi pi-shopping-cart" severity="success" label="Ver carrito"
+    /></a>
   </div>
+
   <h1>Catálogo de Juegos</h1>
 
   @if (cargando) {
-    <div class="loading">Cargando juegos...</div>
+  <div class="loading">Cargando juegos...</div>
+  } @if(error) {
+  <div class="error">{{ error }}</div>
   }
 
-  @if(error) {
-    <div class="error">{{ error }}</div>
-  }
+  <!-- FILTROS -->
+  <div class="filtros-wrapper">
+    <p-card header="Filtros de búsqueda" class="card-filtros mb-5">
+      <div class="filtros-container" >
+        <!-- Filtro género -->
+        <div class="campo-genero">
+          <label class="label-filtro">Género</label>
+          <p-select
+            [options]="generos"
+            [(ngModel)]="filtros.genero"
+            placeholder="Seleccionar género"
+            class="w-full md:w-56"
+          >
+          </p-select>
+        </div>
 
-  <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
-    <ng-template #item let-juego>
-      <div class="card">
-        <div class="card-image-container">
-          <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image"/>
+        <!-- Filtro precio -->
+        <div class="filtro-precio">
+          <p>Precio: {{ priceRange[0] | currency:'USD':'symbol':'1.0-0'}} - {{ priceRange[1] | currency:'USD':'symbol':'1.0-0'}}</p>
+
+          <p-slider
+            [(ngModel)]="priceRange"
+            [min]="minPrice"
+            [max]="maxPrice"
+            [range]="true"
+            (onChange)="actualizarFiltrosPrecio()">
+          </p-slider>
         </div>
-        <div class="card-content">
-          <h2>{{ juego.nombre }}</h2>
-          <p><strong>Año:</strong> {{ juego.anio }}</p>
-          <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
-          <p><strong>Categoria:</strong> {{ juego.categoria }}</p>
-          <p><strong>Precio:</strong> {{ juego.precio }}</p>
-          <p>{{ juego.descripcion }}</p>
-        </div>
-        <div class="card-actions">
-          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"/>
-          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"/>
-          <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"/>
-        </div>
+
+        <!-- Botón aplicar filtros -->
+        <p-button
+          label="Aplicar filtros"
+          icon="pi pi-filter"
+          (onClick)="aplicarFiltros()"
+          class="mt-2 md:mt-0">
+        </p-button>
+
+        <!-- Botón limpiar filtros -->
+        <p-button
+          label="Limpiar filtros"
+          icon="pi pi-times"
+          (onClick)="limpiarFiltros()"
+          class="mt-2 md:mt-0 p-button-secondary">
+        </p-button>
       </div>
-    </ng-template>
-  </p-carousel>
+    </p-card>
+  </div>
+
+  <!-- RESULTADOS -->
+  @if (juegos?.length && !cargando && !error) {
+
+    <!-- Más de un juego: carrusel -->
+    @if (juegos.length > 1) {
+
+      <p-carousel
+        [value]="juegos"
+        [numVisible]="5"
+        [numScroll]="1"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+        [showIndicators]="true"
+        class="juegos-carousel">
+
+        <ng-template pTemplate="item" let-juego>
+          <div class="card">
+            <div class="card-image-container">
+              <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image" />
+            </div>
+
+            <div class="card-content">
+              <h2>{{ juego.nombre }}</h2>
+              <p><strong>Año:</strong> {{ juego.anio }}</p>
+              <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
+              <p><strong>Categoría:</strong> {{ juego.categoria }}</p>
+              <p><strong>Precio:</strong> {{ juego.precio }}</p>
+              <p>{{ juego.descripcion }}</p>
+            </div>
+
+            <div class="card-actions">
+              <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
+              <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
+              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"></p-button>
+            </div>
+          </div>
+        </ng-template>
+
+      </p-carousel>
+
+    } @else {
+
+      <!-- Solo un juego: card centrada, sin carrusel -->
+      <div class="single-card-wrapper">
+        @for (juego of juegos; track juego.id) {
+          <div class="card">
+            <div class="card-image-container">
+              <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image" />
+            </div>
+
+            <div class="card-content">
+              <h2>{{ juego.nombre }}</h2>
+              <p><strong>Año:</strong> {{ juego.anio }}</p>
+              <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
+              <p><strong>Categoría:</strong> {{ juego.categoria }}</p>
+              <p><strong>Precio:</strong> {{ juego.precio }}</p>
+              <p>{{ juego.descripcion }}</p>
+            </div>
+
+            <div class="card-actions">
+              <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
+              <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
+              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"></p-button>
+            </div>
+          </div>
+        }
+      </div>
+
+    }
+
+  } @else if (!cargando && !error) {
+
+    <!-- Ningún juego -->
+    <div class="sin-resultados">
+      <p>No se encontraron juegos con esos filtros.</p>
+      <button type="button" (click)="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+
+  }
+
 </div>

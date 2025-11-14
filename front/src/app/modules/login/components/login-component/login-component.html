@@ -1,23 +1,24 @@
 <div class="login-container">
 
   <h2>Iniciar sesión</h2>
-<div style="display: flex; flex-direction: column;width: 30%;">
-  <label for="">Email:</label>
-  <input type="email"
-         placeholder="Email"
-         [(ngModel)]="email">
-  <label for="">Contraseña:</label>
-  <input type="password"
-         placeholder="Contraseña"
-         [(ngModel)]="contrasenia">
 
-  <button (click)="loguearse()">Iniciar Sesion</button>
-</div>
+  <div class="login-box">
+    <label>Email:</label>
+    <input type="email" placeholder="Email" [(ngModel)]="email">
 
-  <p class="cuenta">No tenes una cuenta existente? <a [routerLink]="['/login/signup']" >Registrate</a></p>
+    <label>Contraseña:</label>
+    <input type="password" placeholder="Contraseña" [(ngModel)]="contrasenia">
+
+    <button (click)="loguearse()">Iniciar Sesion</button>
+  </div>
+
+  <p class="cuenta">
+    No tenes una cuenta existente?
+    <a [routerLink]="['/login/signup']">Registrate</a>
+  </p>
 
   @if(error){
-    <p class="error" style="color: red">{{ error }}</p>
+    <p class="error">{{ error }}</p>
   }
 
 </div>

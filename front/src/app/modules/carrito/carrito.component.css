@@ -170,3 +170,68 @@ p-table ::ng-deep .p-button-danger:hover {
     font-size: 0.85rem;
   }
 }
+
+.tabla-carrito-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.tabla-carrito {
+  width: 80%;
+  max-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+.tabla-carrito th {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+
+.tabla-carrito .p-datatable-tbody > tr:nth-child(even) {
+  background-color: #1f1f1f;
+}
+
+.tabla-carrito .p-datatable-tbody > tr:nth-child(odd) {
+  background-color: #2a2a2a;
+}
+
+
+.tabla-carrito .p-datatable-tbody > tr:hover {
+  background-color: #444444;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+.tabla-carrito td {
+  padding: 0.5rem 1rem;
+  color: #7a7a7a;
+  background-color: inherit;
+}
+
+
+.tabla-carrito .p-button-danger {
+  background-color: #ff4d4d;
+  border-color: #ff4d4d;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.tabla-carrito .p-button-danger:hover {
+  background-color: #e60000;
+}
+
+
+
+
+

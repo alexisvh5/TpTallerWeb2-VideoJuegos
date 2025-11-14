@@ -1,14 +1,34 @@
 import { prisma } from "../prisma.js";
 
 export class JuegoRepository {
-  async findAllJuegos() {
-    return await prisma.juego.findMany();
+  async findAllJuegos( { where } ) {
+    return await prisma.juego.findMany( { where , orderBy: { nombre: 'asc' } });
   }
 
   async findJuegoById(id: number) {
     return await prisma.juego.findUnique({
       where: { id },
     });
+  }
+
+  async getGeneros() {
+    const generos = await prisma.juego.findMany({
+        where: {
+          categoria: {
+            not: null,
+          },
+        },
+        select: {
+          categoria: true,
+        },
+        distinct: ['categoria'],
+      });
+
+    const generosUnicos = generos
+      .map(j => j.categoria)
+      .filter(Boolean) as string[];
+
+    return generosUnicos;
   }
 
   async findJuegoByNombre(nombre: string) {

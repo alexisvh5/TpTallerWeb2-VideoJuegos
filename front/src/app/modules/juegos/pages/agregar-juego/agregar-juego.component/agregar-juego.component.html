@@ -1,35 +1,86 @@
 <form [formGroup]="form" (ngSubmit)="agregarJuego()">
 
-<h2>Agregar Juego</h2>
-<div style="display: flex; flex-direction: column;width: 30%;">
+  <h2>Agregar Juego</h2>
 
-  <label for="">Nombre: </label>
-  <input type="text" placeholder="Nombre" formControlName="nombre">
-  <label for="">Año: </label>
-  <input type="number" placeholder="Año de creación" formControlName="anio">
-  <label for="">Descripción: </label>
-  <input type="text" placeholder="Descripción" formControlName="descripcion">
-  <label for="">Desarrollador: </label>
-  <input type="text" placeholder="Desarrollador del juego" formControlName="desarrollador">
-  <label for="">Precio: </label>
-  <input type="number" placeholder="Precio del juego" formControlName="precio">
-  <label for="">Categoria: </label>
-  <input type="text" placeholder="Categoria" formControlName="categoria">
-  <label for="">Cargar Imagen: </label>
-  <div class="upload-section">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*">
-    <button pButton label="Subir Imagen Ahora" (click)="uploadImage()" type="button">Vista Previa</button>
+  <div class="form-box">
+
+    <!-- NOMBRE -->
+    <label>Nombre: </label>
+    <input type="text" placeholder="Nombre" formControlName="nombre">
+    @if (form.get('nombre')?.hasError('required') && (form.get('nombre')?.touched || submitted)) {
+      <p class="field-error">El nombre es obligatorio.</p>
+    }
+
+    <!-- AÑO -->
+    <label>Año: </label>
+    <input type="number" placeholder="Año de creación" formControlName="anio">
+    @if (form.get('anio')?.errors && (form.get('anio')?.touched || submitted)) {
+      @if (form.get('anio')?.hasError('required')) {
+        <p class="field-error">El año es obligatorio.</p>
+      }
+      @if (form.get('anio')?.hasError('min')) {
+        <p class="field-error">El año debe ser mayor o igual a 1960.</p>
+      }
+    }
+
+    <!-- DESCRIPCION -->
+    <label>Descripción: </label>
+    <input type="text" placeholder="Descripción" formControlName="descripcion">
+    @if (form.get('descripcion')?.hasError('required') && (form.get('descripcion')?.touched || submitted)) {
+      <p class="field-error">La descripción es obligatoria.</p>
+    }
+
+    <!-- DESARROLLADOR -->
+    <label>Desarrollador: </label>
+    <input type="text" placeholder="Desarrollador del juego" formControlName="desarrollador">
+    @if (form.get('desarrollador')?.hasError('required') && (form.get('desarrollador')?.touched || submitted)) {
+      <p class="field-error">El desarrollador es obligatorio.</p>
+    }
+
+    <!-- PRECIO -->
+    <label>Precio: </label>
+    <input type="number" placeholder="Precio del juego" formControlName="precio">
+    @if (form.get('precio')?.errors && (form.get('precio')?.touched || submitted)) {
+      @if (form.get('precio')?.hasError('required')) {
+        <p class="field-error">El precio es obligatorio.</p>
+      }
+      @if (form.get('precio')?.hasError('min')) {
+        <p class="field-error">El precio no puede ser negativo.</p>
+      }
+    }
+
+    <!-- CATEGORIA -->
+    <label>Categoria: </label>
+    <input type="text" placeholder="Categoria" formControlName="categoria">
+    @if (form.get('categoria')?.hasError('required') && (form.get('categoria')?.touched || submitted)) {
+      <p class="field-error">La categoría es obligatoria.</p>
+    }
+
+    <!-- IMAGEN -->
+    <label>Cargar Imagen: </label>
+    <div class="upload-section">
+      <input type="file" (change)="onFileSelected($event)" accept="image/*">
+      <button pButton label="Subir Imagen Ahora" (click)="uploadImage()" type="button">
+        Vista Previa
+      </button>
+
       @if(uploadedImageUrl){
         <p>URL de imagen subida (relativa): {{ uploadedImageUrl }}</p>
-      <img [src]="construirUrlImagen(uploadedImageUrl)" alt="Imagen subida" style="max-width: 200px; margin-top: 10px;">
+        <img [src]="construirUrlImagen(uploadedImageUrl)" alt="Imagen subida" style="max-width: 200px; margin-top: 10px;">
       }
-  </div>
-  <button type="submit">Agregar Juego</button>
+    </div>
 
-</div>
-@if(error) {
-  <p style="color:red">{{ error }}</p>
-} @else {
-  <p style="color:green">{{ exito }}</p>
-}
+    <!-- BOTÓN SUBMIT -->
+    <button type="submit">Agregar Juego</button>
+
+    <!-- MENSAJES BACKEND -->
+    @if(error) {
+      <p class="backend-error">{{ error }}</p>
+    }
+    @if(exito) {
+      <p class="backend-success">{{ exito }}</p>
+    }
+
+  </div>
+
 </form>
