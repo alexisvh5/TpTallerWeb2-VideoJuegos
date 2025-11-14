@@ -1,6 +1,7 @@
 import { type Request, type Response } from "express";
 import { JuegoRepository } from "../repository/juego.repository.js";
 import { JuegoService } from "../services/juego.service.js";
+import { parse } from "path";
 
 const juegoRepository = new JuegoRepository();
 const juegoService = new JuegoService(juegoRepository);
@@ -20,8 +21,37 @@ export class JuegoController {
 
   async getAll(req: Request, res: Response) {
     try {
-      const juegos = await juegoService.getAllJuegos();
+
+      const { nombre, genero, precioMin, precioMax } = req.query;
+      const where = {};
+
+      if(genero && genero !== "Cualquiera"){
+        where['categoria'] = genero as string;
+      }
+
+      if(precioMin || precioMax){
+        where['precio'] = {};
+
+        if(precioMin){
+          where['precio']['gte'] = parseFloat(precioMin as string);
+        }
+        if(precioMax){
+          where['precio']['lte'] = parseFloat(precioMax as string);
+        }
+      }
+
+      console.log('Where object:', where);
+      const juegos = await juegoService.getAllJuegos({ where });
       res.status(200).json(juegos);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async getGeneros(req: Request, res: Response) {
+    try {
+      const generos = await juegoService.getGeneros();
+      res.status(200).json(generos);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }

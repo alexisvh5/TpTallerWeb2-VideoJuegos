@@ -13,6 +13,42 @@
     <div class="error">{{ error }}</div>
   }
 
+  <div class="filtros-wrapper">
+  <p-card header="Filtros" class="card-filtros mb-5">
+  <div class="filtros-container" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: start;">
+    <p-select [options]="generos" [(ngModel)]="filtros.genero" placeholder="Seleccionar genero" class="w-full md:w-56" />
+    <div class="filtro-precio">
+    <p>Precio: {{priceRange[0]}} - {{priceRange[1]}}</p>
+
+    <p-slider
+      [(ngModel)]="priceRange"
+      [min]="minPrice"
+      [max]="maxPrice"
+      [range]="true"
+      [style]="{'width':'300px'}"
+      (onChange)="actualizarFiltrosPrecio()">
+    </p-slider>
+    </div>
+
+    <!-- Botón aplicar filtros -->
+    <p-button
+      label="Aplicar filtros"
+      icon="pi pi-filter"
+      (onClick)="aplicarFiltros()"
+      class="mt-2 md:mt-0">
+    </p-button>
+
+    <!-- Botón limpiar filtros -->
+    <p-button
+      label="Limpiar filtros"
+      icon="pi pi-times"
+      (onClick)="limpiarFiltros()"
+      class="mt-2 md:mt-0 p-button-secondary">
+    </p-button>
+  </div>
+  </p-card>
+  </div>
+
   <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
     <ng-template #item let-juego>
       <div class="card">

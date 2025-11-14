@@ -34,6 +34,7 @@ getUsuarioEnSesion(){
 
 logout(){
   localStorage.removeItem('USUARIO');
+  localStorage.removeItem('filtrosJuegos');
   this.router.navigate(['/login']);
 }
 

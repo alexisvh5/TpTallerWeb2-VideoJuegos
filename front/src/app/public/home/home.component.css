@@ -546,3 +546,12 @@
     letter-spacing: 2px;
   }
 }
+
+.card-filtros{
+  display: inline-block;
+}
+
+.filtros-wrapper {
+  display: flex;
+  justify-content: center;
+}
