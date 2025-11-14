@@ -1,25 +1,33 @@
 <form [formGroup]="form" (ngSubmit)="signUp()">
 
-<h2>Crear Cuenta</h2>
-<div style="display: flex; flex-direction: column;width: 30%;">
+  <h2>Crear Cuenta</h2>
 
-  <label for="">Nombre: </label>
-  <input type="text" placeholder="Nombre" formControlName="nombre">
-  <label for="">Apellido: </label>
-  <input type="text" placeholder="Apellido" formControlName="apellido">
-  <label for="">Direccion: </label>
-  <input type="text" placeholder="Dirección" formControlName="direccion">
-  <label for="">Email: </label>
-  <input type="email" placeholder="Email" formControlName="email">
-  <label for="">Contraseña: </label>
-  <input type="password" placeholder="Contraseña" formControlName="contrasenia">
-  <button type="submit">Registrarse</button>
-  @if(error) {
-    <p style="color:red">{{ error }}</p>
-  } @else {
-    <p style="color:green">{{ exito }}</p>
-  }
+  <div class="form-box">
+    <label>Nombre: </label>
+    <input type="text" placeholder="Nombre" formControlName="nombre">
 
-</div>
-  <p>Ya tenes una cuenta existente? <a [routerLink]="['/login']" >Iniciar sesión</a></p>
+    <label>Apellido: </label>
+    <input type="text" placeholder="Apellido" formControlName="apellido">
+
+    <label>Dirección: </label>
+    <input type="text" placeholder="Dirección" formControlName="direccion">
+
+    <label>Email: </label>
+    <input type="email" placeholder="Email" formControlName="email">
+
+    <label>Contraseña: </label>
+    <input type="password" placeholder="Contraseña" formControlName="contrasenia">
+
+    <button type="submit">Registrarse</button>
+
+    @if(error) {
+      <p style="color:red">{{ error }}</p>
+    } @else {
+      <p style="color:green">{{ exito }}</p>
+    }
+  </div>
+
+  <p>Ya tenes una cuenta existente?
+    <a [routerLink]="['/login']">Iniciar sesión</a>
+  </p>
 </form>

@@ -1,3 +1,23 @@
+/* Recomendado: reset simple */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.login-box {
+  display: flex;
+  flex-direction: column;
+  width: 400px;        /* tamaño cómodo en desktop */
+  max-width: 90%;      /* se ajusta en móvil */
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3),
+              inset 0 0 60px rgba(138,43,226,0.1);
+}
+
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -11,6 +31,7 @@
   overflow: hidden;
 }
 
+/* Luces de fondo */
 .login-container::before {
   content: '';
   position: absolute;
@@ -59,6 +80,7 @@
   z-index: 1;
 }
 
+/* Caja del formulario */
 .login-container > div {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -99,6 +121,7 @@
   transition: all 0.3s ease;
   outline: none;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .login-container input::placeholder {
@@ -209,14 +232,92 @@
   75% { transform: translateX(10px); }
 }
 
-/* Responsive */
+/* ====== RESPONSIVE ====== */
+
+/* Tablets y pantallas medianas */
 @media (max-width: 768px) {
+  .login-container {
+    padding: 16px;
+  }
+
   .login-container h2 {
     font-size: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .login-container > div {
     padding: 2rem 1.5rem;
     width: 100%;
+    max-width: 420px;
+  }
+
+  /* Que las luces no molesten tanto en pantallas chicas */
+  .login-container::before {
+    width: 300px;
+    height: 300px;
+    top: -120px;
+    right: -120px;
+  }
+
+  .login-container::after {
+    width: 220px;
+    height: 220px;
+    bottom: -80px;
+    left: -80px;
+  }
+}
+
+/* Celulares chicos */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 12px;
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .login-container h2 {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+
+  .login-container > div {
+    padding: 1.5rem 1.25rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  .login-container input {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .login-container button {
+    padding: 14px;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    margin-top: 1.5rem;
+  }
+
+  .login-container > .cuenta {
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Si en algunos celus se corta el fondo, podés bajar aún más la intensidad o esconder una de las luces */
+  .login-container::before,
+  .login-container::after {
+    opacity: 0.4;
+  }
+}
+
+/* Celus MUY chicos (opc.) */
+@media (max-width: 360px) {
+  .login-container h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-container > div {
+    padding: 1.25rem 1rem;
   }
 }
