@@ -23,15 +23,10 @@ export class LoginComponent {
     this.autService.login({email: this.email, contrasenia: this.contrasenia}).subscribe({
       next:(res)=>{
         this.autService.guardarUsuarioEnSesion(res.usuario);
-        alert('Login exitoso');
         this.router.navigate(['/home']);
       },
       error:(err)=>{
-     console.log('ERROR COMPLETO:', err);
-      console.log('BODY DEL ERROR:', err.error);
-
       this.error = err.error?.message || err.error?.error || 'Error al iniciar sesión';
-      alert('Error en el login: ' + this.error);
       }
     })
   }
