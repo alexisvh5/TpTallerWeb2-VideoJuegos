@@ -48,28 +48,29 @@ export class HomeComponent implements OnInit {
   cargando: boolean = false;
   error = '';
   private apiBaseUrl = environment.api_url.replace('/api', '');
-  responsiveOptions: any[] = [
-    {
-      breakpoint: '1400px',
-      numVisible: 5,
-      numScroll: 5,
-    },
-    {
-      breakpoint: '1199px',
-      numVisible: 4,
-      numScroll: 4,
-    },
-    {
-      breakpoint: '767px',
-      numVisible: 2,
-      numScroll: 2,
-    },
-    {
-      breakpoint: '575px',
-      numVisible: 1,
-      numScroll: 1,
-    },
-  ];
+responsiveOptions: any[] = [
+  {
+    breakpoint: '1600px',   // hasta 1600px de ancho
+    numVisible: 4,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1200px',   // desktop chico / laptop
+    numVisible: 3,
+    numScroll: 1
+  },
+  {
+    breakpoint: '992px',    // tablet horizontal
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '768px',    // mobile / tablet vertical
+    numVisible: 1,
+    numScroll: 1
+  }
+];
+
 
   filtros: FiltrosJuego = {
     nombre: '',
