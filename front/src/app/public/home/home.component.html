@@ -80,7 +80,7 @@
         class="juegos-carousel">
 
         <ng-template pTemplate="item" let-juego>
-          <div class="card">
+          <div class="card" (click)="verJuego(juego.id)">
             <div class="card-image-container">
               <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image" />
             </div>
