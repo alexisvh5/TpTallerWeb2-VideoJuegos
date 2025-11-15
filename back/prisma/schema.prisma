@@ -62,6 +62,7 @@ model Usuario {
   direccion   String   @db.VarChar(255)
   email       String   @unique @db.VarChar(255)
   contrasenia String   @db.VarChar(255)
+  rol         String   @default("USER") @db.VarChar(20)
   Carrito     Carrito?
   Compra      Compra[]
 }

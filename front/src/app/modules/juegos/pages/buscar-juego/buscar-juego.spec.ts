@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-
+<<<<<<<< HEAD:front/src/app/modules/juegos/pages/buscar-juego/buscar-juego.spec.ts
 import { BuscarJuego } from './buscar-juego';
 
 describe('BuscarJuego', () => {
@@ -14,7 +14,7 @@ describe('BuscarJuego', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(BuscarJuego);
-
+========
 import { CarritoComponent } from './carrito.component';
 
 describe('CarritoComponent', () => {
@@ -28,7 +28,7 @@ describe('CarritoComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(CarritoComponent);
-
+>>>>>>>> 7e64b347d9f80c5585069491b8e3a7b1de78fd16:front/src/app/modules/carrito/carrito.component.spec.ts
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -36,4 +36,4 @@ describe('CarritoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-})})})
+});

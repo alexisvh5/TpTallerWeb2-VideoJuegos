@@ -10,7 +10,7 @@ export class UsuarioRepository{
 
   async findAllUsuarios() {
     return await prisma.usuario.findMany({
-      select: { id: true, nombre: true, apellido: true, email: true }
+      select: { id: true, nombre: true, apellido: true, email: true, direccion: true, rol: true},
     });
   }
 
@@ -23,6 +23,13 @@ export class UsuarioRepository{
   async findUsuarioByEmail(email: string) {
     return await prisma.usuario.findUnique({
       where: { email },
+    });
+  }
+
+  async updatePasswordUsuario(id: number, newPassword: string) {
+    return await prisma.usuario.update({
+      where: { id },
+      data: { contrasenia: newPassword },
     });
   }
 

@@ -11,9 +11,7 @@
   <h1>Catálogo de Juegos</h1>
 
   @if (cargando) {
-  <div class="loading">Cargando juegos...</div>
-  } @if(error) {
-  <div class="error">{{ error }}</div>
+      <app-primeng-spinner></app-primeng-spinner>
   }
 
   <!-- FILTROS -->
@@ -32,17 +30,27 @@
           </p-select>
         </div>
 
-        <!-- Filtro precio -->
-        <div class="filtro-precio">
-          <p>Precio: {{ priceRange[0] | currency:'USD':'symbol':'1.0-0'}} - {{ priceRange[1] | currency:'USD':'symbol':'1.0-0'}}</p>
+  <p-carousel [value]="juegos" [numVisible]="5" [numScroll]="5" [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="true">
+    <ng-template #item let-juego>
+      <div class="card" (click)="verJuego(juego.id)">
 
-          <p-slider
-            [(ngModel)]="priceRange"
-            [min]="minPrice"
-            [max]="maxPrice"
-            [range]="true"
-            (onChange)="actualizarFiltrosPrecio()">
-          </p-slider>
+        <div class="card-image-container">
+          <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image"/>
+        </div>
+        <div class="card-content">
+          <h2>{{ juego.nombre }}</h2>
+          <p><strong>Año:</strong> {{ juego.anio }}</p>
+          <!-- <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p> -->
+          <p><strong>Categoria:</strong> {{ juego.categoria }}</p>
+          <p><strong>Precio:</strong> {{ juego.precio }}</p>
+          <!-- <p>{{ juego.descripcion }}</p> -->
+        </div>
+        <div class="card-actions">
+          @if(usuario && usuario.rol?.toLowerCase() === 'admin'){
+          <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id); $event.stopPropagation();"/>
+          <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id); $event.stopPropagation();"/>
+          }
+          <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id); $event.stopPropagation();"/>
         </div>
 
         <!-- Botón aplicar filtros -->
@@ -61,11 +69,11 @@
           class="mt-2 md:mt-0 p-button-secondary">
         </p-button>
       </div>
-    </p-card>
-  </div>
+    <!-- </p-card> -->
+  <!-- </div> -->
 
   <!-- RESULTADOS -->
-  @if (juegos?.length && !cargando && !error) {
+  @if (juegos.length && !cargando && !error) {
 
     <!-- Más de un juego: carrusel -->
     @if (juegos.length > 1) {
@@ -144,4 +152,4 @@
 
   }
 
-</div>
+<!-- </div> -->

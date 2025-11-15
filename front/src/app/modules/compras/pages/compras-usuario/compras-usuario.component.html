@@ -1,0 +1,62 @@
+
+<div class="compras-container">
+
+  <h2>Historial de Compras</h2>
+
+  @if (cargando) {
+    <p>Cargando compras...</p>
+  } @else {
+
+    @if (error) {
+      <div class="error">{{ error }}</div>
+    }
+
+    <div class="compras-list">
+      @for (compra of compras; track compra.id) {
+        <div class="compra-card">
+
+          <h3>
+            {{ compra.fecha | date:'dd/MM/yyyy' }}
+          </h3>
+
+          <p>Total pagado: <strong>${{ compra.totalPagado }}</strong></p>
+
+          <div class="items">
+
+            @for (item of compra?.ItemCompra; track item.id) {
+              <div class="item">
+                <img
+                  [src]="fixUrl(item.Juego?.imagen_url)"
+                  [alt]="item.Juego?.nombre"
+                  class="item-img"
+                />
+                <p><strong>{{ item.Juego?.nombre }}</strong></p>
+                <p>Precio: ${{ item.precioAlComprar }}</p>
+              </div>
+            } @empty {
+              <p>No hay items en esta compra.</p>
+            }
+
+          </div>
+
+          <hr />
+
+        </div>
+      }
+      @if(compras.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-shopping-bag" style="font-size: 3rem; color: #d1d5db; margin-bottom: 1rem;"></i>
+          <p>No tenés compras realizadas.</p>
+          <button
+            class="btn-primary"
+            style="margin-top: 1rem;"
+            (click)="irAJuegos()">
+            Explorar juegos
+          </button>
+        </div>
+      }
+    </div>
+
+  }
+
+</div>

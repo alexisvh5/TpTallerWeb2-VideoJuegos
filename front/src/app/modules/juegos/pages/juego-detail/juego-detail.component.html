@@ -1,0 +1,47 @@
+
+<div class="detalle-container">
+  <p-toast></p-toast>
+
+  <button class="btn-volver" (click)="volver()">← Volver</button>
+
+  @if(cargando) {
+    <app-primeng-spinner></app-primeng-spinner>
+  }
+
+  @if(error && !cargando) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if(juego && !cargando) {
+    <div class="detalle-card">
+
+      <div class="detalle-imagen">
+        <img [src]="juego.imagen_url" [alt]="juego.nombre">
+      </div>
+
+      <div class="detalle-info">
+        <div>
+          <h1>{{ juego.nombre }}</h1>
+
+          <p><strong>Año:</strong> {{ juego.anio }}</p>
+          <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
+          <p><strong>Categoría:</strong> {{ juego.categoria }}</p>
+          <p><strong>Precio:</strong> ${{ juego.precio }}</p>
+
+          <p class="descripcion">{{ juego.descripcion }}</p>
+        </div>
+
+        <div class="botones-accion">
+          <button class="btn-comprar" (click)="comprarAhora()">
+            Comprar ahora
+          </button>
+          <button class="btn-carrito" (click)="agregarAlCarrito(juego.id)">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+    </div>
+  }
+
+</div>

@@ -66,4 +66,14 @@ export class JuegoService {
       return await this.juegoRepository.modificarJuego(id, data)
     }
 
+    async buscarPorNombre(nombre:string){
+      const juegos = this.juegoRepository.findJuegoByNombre(nombre);
+      if((await juegos).length === 0){
+        throw new Error("No se encontraron juegos con ese nombre");
+      }
+
+      return juegos;
+
+    }
+
 }

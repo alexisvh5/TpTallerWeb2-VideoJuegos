@@ -29,6 +29,9 @@ CREATE TABLE "Usuario"(
     "contrasenia" VARCHAR(255) NOT NULL
 );
 
+ALTER TABLE "Usuario"
+ADD COLUMN "rol" VARCHAR(20) NOT NULL DEFAULT 'USER';
+
 CREATE TABLE "Carrito"(
     "id" SERIAL PRIMARY KEY,
     "idUsuario" INTEGER NOT NULL UNIQUE REFERENCES "Usuario"("id") ON DELETE CASCADE ON UPDATE CASCADE
@@ -80,7 +83,8 @@ INSERT INTO "Juego" ("nombre", "anio", "descripcion", "desarrollador", "precio",
 ('Horizon Forbidden West', 2022, 'Acompaña a Aloy en un viaje por tierras post-apocalípticas llenas de máquinas.', 'Guerrilla Games', 69.99, 'Acción-Aventura', '/public/images/juegos/horizon.jpg'),
 ('Call of Duty: Modern Warfare III', 2023, 'Acción bélica intensa con campaña, multijugador y zombies.', 'Infinity Ward', 69.99, 'Shooter', '/public/images/juegos/cod_mw3.jpg'),
 ('Baldurs Gate 3', 2023, 'Juego de rol basado en Dungeons & Dragons con libertad total de decisión.', 'Larian Studios', 69.99, 'RPG', '/public/images/juegos/baldurs_gate3.jpg'),
-('Spider-Man 2', 2023, 'Controla a Peter Parker y Miles Morales en esta aventura superheroica.', 'Insomniac Games', 69.99, 'Acción-Aventura', '/public/images/juegos/spiderman.png');
+('Spider-Man 2', 2023, 'Controla a Peter Parker y Miles Morales en esta aventura superheroica.', 'Insomniac Games', 69.99, 'Acción-Aventura', '/public/images/juegos/spiderman.png'),
+('Counter Strike 2', 2012, 'Durante las dos últimas décadas, Counter Strike ha proporcionado una experiencia competitiva de primer nivel para los millones de jugadores de todo el mundo que contribuyeron a darle forma. Ahora el próximo capítulo en la historia de CS está a punto de comenzar.', 'Valve', '10', 'Accion', '/public/images/juegos/cs.jpg');
 
 -- Conectar géneros (Asumimos IDs 1-4 para juegos, 1-4 para géneros)
 INSERT INTO "_JuegoGenero" ("A", "B") VALUES 
@@ -97,6 +101,14 @@ INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia"
 ('Juan', 'Pérez', 'Calle Falsa 123', 'juan.perez@email.com', 'hash_simulado_de_juan'),
 ('Ana', 'Gómez', 'Avenida Siempre Viva 742', 'ana.gomez@email.com', 'hash_simulado_de_ana');
 -- Asumimos Juan ID 1, Ana ID 2
+
+-- contraseña: 1234
+INSERT INTO "Usuario" ("nombre", "apellido", "direccion", "email", "contrasenia", "rol") VALUES
+('Admin', 'Test', '-', 'Admin@test.com', '$2b$10$i4C5COxkl4LGP9FWkaJ4/.u18j7p3Z6e2QXYRIBBCZNdqer.j6xuC', 'ADMIN'),
+
+UPDATE "Usuario"
+SET "contrasenia" = '$2b$10$ZGfN5nXmIrC.enySJacWsu6wB8sjqvhh0YdI.p74Jf7.Y6LhcoxwW'
+WHERE email = 'Admin@test.com';
 
 -- ########## PASO 2: CREAR CARRITOS ##########
 INSERT INTO "Carrito" ("idUsuario") VALUES (1), (2);

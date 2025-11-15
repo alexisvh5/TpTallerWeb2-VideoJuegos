@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "types": ["node"] ,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -23,6 +24,10 @@
     "strictTemplates": true
   },
   "files": [],
+  "exclude": [
+    "node_modules/**",
+    "../back/**"
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

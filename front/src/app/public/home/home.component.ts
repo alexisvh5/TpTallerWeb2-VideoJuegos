@@ -16,6 +16,7 @@ import { SelectModule } from 'primeng/select';
 import { CardModule } from 'primeng/card';
 import { SliderModule } from 'primeng/slider';
 import { CurrencyPipe } from '@angular/common';
+import { PrimengSpinner } from "../../shared/components/primeng/primeng-spinner/primeng-spinner";
 
 @Component({
   selector: 'app-home',
@@ -29,8 +30,9 @@ import { CurrencyPipe } from '@angular/common';
     SelectModule,
     CardModule,
     SliderModule,
-    CurrencyPipe
-  ],
+    CurrencyPipe,
+    PrimengSpinner
+],
   providers: [MessageService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -49,6 +51,12 @@ export class HomeComponent implements OnInit {
   generos: string[] = [];
   cargando: boolean = false;
   error = '';
+
+
+  usuario: any;
+
+  apiUrl = 'http://localhost:3000';
+
   private apiBaseUrl = environment.api_url.replace('/api', '');
 responsiveOptions: any[] = [
   {
@@ -235,4 +243,9 @@ responsiveOptions: any[] = [
       life: 3000,
     });
   }
+
+  verJuego(id:number){
+    this.router.navigate(['/juego', id])
+  }
+
 }
