@@ -111,7 +111,7 @@
       <!-- Solo un juego: card centrada, sin carrusel -->
       <div class="single-card-wrapper">
         @for (juego of juegos; track juego.id) {
-          <div class="card">
+          <div class="card" (click)="verJuego(juego.id)">
             <div class="card-image-container">
               <img [src]="juego.imagen_url" [alt]="juego.nombre" class="card-image" />
             </div>
