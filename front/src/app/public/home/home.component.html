@@ -96,10 +96,10 @@
 
             <div class="card-actions">
               @if(esAdmin){
-              <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
-              <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
+              <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id); $event.stopPropagation();"></p-button>
+              <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id); $event.stopPropagation();"></p-button>
               }
-              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"></p-button>
+              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id); $event.stopPropagation();"></p-button>
             </div>
           </div>
         </ng-template>
@@ -127,10 +127,10 @@
 
             <div class="card-actions">
               @if(esAdmin){
-                <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
-                <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
+                <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id); $event.stopPropagation();"></p-button>
+                <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id); $event.stopPropagation();"></p-button>
               }
-              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"></p-button>
+              <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id); $event.stopPropagation();"></p-button>
             </div>
           </div>
         }
