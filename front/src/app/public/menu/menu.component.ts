@@ -81,6 +81,7 @@ export class MenuComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('USUARIO');
+    localStorage.removeItem('filtrosJuegos');
     this.router.navigate(['/login']);
   }
 }
