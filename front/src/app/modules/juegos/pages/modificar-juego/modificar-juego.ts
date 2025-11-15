@@ -5,10 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-modificar-juego',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,ToastModule],
+  providers: [
+    MessageService 
+  ],
   templateUrl: './modificar-juego.html',
   styleUrl: './modificar-juego.css',
 })

@@ -6,10 +6,14 @@ import { min } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../../../../../environments/environment.development';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-agregar-juego.component',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,ToastModule],
+  providers: [
+    MessageService 
+  ],
   templateUrl: './agregar-juego.component.html',
   styleUrl: './agregar-juego.component.css',
 })
