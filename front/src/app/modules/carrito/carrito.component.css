@@ -39,12 +39,13 @@
   50% { transform: translate(30px, -30px) scale(1.05); }
 }
 
-/* Header */
 .carrito-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .carrito-header h2 {
@@ -58,7 +59,6 @@
   z-index: 1;
 }
 
-/* Botón Vaciar Carrito */
 .carrito-header ::ng-deep .p-button-danger {
   background: linear-gradient(135deg, #ff4757, #dc143c) !important;
   border-radius: 12px;
@@ -74,7 +74,37 @@
   background: linear-gradient(135deg, #ff5c6c, #ee3649) !important;
 }
 
-/* Tabla */
+.carrito-container > p {
+  margin: 0.3rem 0;
+  color: #e0e0e0;
+  font-weight: 500;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(138, 43, 226, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.carrito-container > p ::ng-deep .p-button-success {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.carrito-container > p ::ng-deep .p-button-success:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+  background: linear-gradient(135deg, #34d399, #10b981) !important;
+}
+
 p-table {
   width: 100%;
   backdrop-filter: blur(10px);
@@ -112,7 +142,6 @@ p-table ::ng-deep .p-datatable-tbody > tr:hover {
   background: rgba(138, 43, 226, 0.1);
 }
 
-/* Botones de eliminar dentro de la tabla */
 p-table ::ng-deep .p-button-danger {
   background: linear-gradient(135deg, #ff4757, #dc143c) !important;
   border-radius: 12px;
@@ -128,7 +157,6 @@ p-table ::ng-deep .p-button-danger:hover {
   background: linear-gradient(135deg, #ff5c6c, #ee3649) !important;
 }
 
-/* Mensaje de carrito vacío */
 .carrito-empty {
   text-align: center;
   padding: 3rem;
@@ -149,32 +177,11 @@ p-table ::ng-deep .p-button-danger:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .carrito-container {
-    padding: 1.5rem;
-  }
-
-  .carrito-header h2 {
-    font-size: 1.5rem;
-  }
-
-  p-table ::ng-deep .p-datatable-thead > tr > th,
-  p-table ::ng-deep .p-datatable-tbody > tr > td {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .carrito-header ::ng-deep .p-button-danger {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
-  }
-}
-
 .tabla-carrito-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+  width: 100%;
 }
 
 .tabla-carrito {
@@ -188,14 +195,12 @@ p-table ::ng-deep .p-button-danger:hover {
   overflow: hidden;
 }
 
-
 .tabla-carrito th {
   background-color: #333333;
   color: #ffffff;
   text-align: left;
   padding: 0.75rem 1rem;
 }
-
 
 .tabla-carrito .p-datatable-tbody > tr:nth-child(even) {
   background-color: #1f1f1f;
@@ -205,20 +210,17 @@ p-table ::ng-deep .p-button-danger:hover {
   background-color: #2a2a2a;
 }
 
-
 .tabla-carrito .p-datatable-tbody > tr:hover {
   background-color: #444444;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-
 .tabla-carrito td {
   padding: 0.5rem 1rem;
-  color: #7a7a7a;
+  color: #e0e0e0;
   background-color: inherit;
 }
-
 
 .tabla-carrito .p-button-danger {
   background-color: #ff4d4d;
@@ -231,7 +233,285 @@ p-table ::ng-deep .p-button-danger:hover {
   background-color: #e60000;
 }
 
+/* ========== RESPONSIVE ========== */
 
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .carrito-container {
+    padding: 1.5rem;
+  }
 
+  .carrito-header h2 {
+    font-size: 1.75rem;
+  }
 
+  .tabla-carrito {
+    width: 90%;
+  }
 
+  .carrito-container > p {
+    font-size: 1.25rem;
+  }
+}
+
+::ng-deep .p-toast {
+  width: 25rem;
+}
+
+::ng-deep .p-toast .p-toast-message {
+  margin: 0 0 1rem 0;
+}
+
+/* Mobile (hasta 768px) */
+@media (max-width: 768px) {
+  .carrito-container {
+    padding: 1rem;
+  }
+
+  .carrito-container::before,
+  .carrito-container::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  ::ng-deep .p-toast {
+    width: calc(100vw - 2rem) !important;
+    max-width: 20rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message {
+    font-size: 0.9rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-message-content {
+    padding: 0.75rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-summary {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-detail {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-icon-close {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .carrito-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .carrito-header h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .carrito-header h2 i {
+    font-size: 1.5rem !important;
+  }
+
+  .carrito-header ::ng-deep .p-button-danger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .carrito-container > p {
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+
+  .carrito-container > p ::ng-deep .p-button-success {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tabla-carrito-wrapper {
+    justify-content: stretch;
+  }
+
+  .tabla-carrito {
+    width: 100%;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-thead {
+    display: none;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    background: rgba(42, 42, 42, 0.9) !important;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    padding: 1rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr:hover {
+    background: rgba(68, 68, 68, 0.9) !important;
+    transform: translateY(-2px);
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(138, 43, 226, 0.15);
+    text-align: right;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td:last-child {
+    border-bottom: none;
+    justify-content: center;
+    padding-top: 1rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td:nth-child(1)::before {
+    content: 'Juego:';
+    font-weight: 700;
+    color: #9d4edd;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td:nth-child(2)::before {
+    content: 'Precio:';
+    font-weight: 700;
+    color: #9d4edd;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td:nth-child(3)::before {
+    content: '';
+  }
+
+  .tabla-carrito ::ng-deep .p-button-danger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  p-table ::ng-deep .p-button-danger {
+    width: 100%;
+    padding: 0.6rem;
+  }
+
+  .carrito-empty {
+    padding: 2rem;
+    font-size: 1.1rem;
+    margin: 1.5rem auto;
+  }
+
+  .carrito-empty ::ng-deep .p-card {
+    max-width: 100% !important;
+    margin: 3rem auto !important;
+  }
+
+  .carrito-empty ::ng-deep .p-card-header {
+    font-size: 1.25rem;
+  }
+
+  .carrito-empty a ::ng-deep .p-button {
+    width: 100%;
+  }
+}
+
+/* Mobile pequeño (hasta 480px) */
+@media (max-width: 480px) {
+  .carrito-container {
+    padding: 0.75rem;
+  }
+
+  ::ng-deep .p-toast {
+    max-width: 18rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message {
+    font-size: 0.85rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-content {
+    padding: 0.6rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-summary {
+    font-size: 0.9rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-detail {
+    font-size: 0.8rem;
+  }
+
+  .carrito-header h2 {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+  }
+
+  .carrito-header h2 i {
+    font-size: 1.25rem !important;
+  }
+
+  .carrito-container > p {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  .carrito-container > p ::ng-deep .p-button-success {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .carrito-header ::ng-deep .p-button-danger {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr {
+    padding: 0.75rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td {
+    padding: 0.6rem 0;
+    font-size: 0.9rem;
+  }
+
+  p-table ::ng-deep .p-button-danger {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .carrito-empty {
+    padding: 1.5rem;
+    font-size: 1rem;
+    margin: 1rem auto;
+  }
+}
+
+/* Mobile muy pequeño (hasta 360px) */
+@media (max-width: 360px) {
+  .carrito-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .carrito-container > p {
+    font-size: 0.9rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td {
+    font-size: 0.85rem;
+  }
+
+  .tabla-carrito ::ng-deep .p-datatable-tbody > tr > td::before {
+    font-size: 0.8rem;
+  }
+}
