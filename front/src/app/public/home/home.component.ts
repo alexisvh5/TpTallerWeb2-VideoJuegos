@@ -198,6 +198,7 @@ responsiveOptions: any[] = [
     };
 
     this.priceRange = [this.minPrice, this.maxPrice];
+    localStorage.removeItem('filtrosJuegos');
     this.cargarJuegos();
   }
 
