@@ -40,4 +40,8 @@ isLoggedIn(): boolean{
   return this.getUsuarioEnSesion() !== null;
 }
 
+isAdmin(): boolean {
+  const usuario = this.getUsuarioEnSesion();
+  return usuario?.rol?.toLowerCase() === 'admin';
+}
 }

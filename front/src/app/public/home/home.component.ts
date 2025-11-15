@@ -17,6 +17,7 @@ import { CardModule } from 'primeng/card';
 import { SliderModule } from 'primeng/slider';
 import { CurrencyPipe } from '@angular/common';
 import { PrimengSpinner } from "../../shared/components/primeng/primeng-spinner/primeng-spinner";
+import { AutenticacionService } from '../../api/services/autenticacion/autenticacion.service';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
   private router = inject(Router);
   private messageService = inject(MessageService);
   private httpClient = inject(HttpClient);
+  private autenticacionService = inject(AutenticacionService);
 
   selectedFile: File | null = null;
   uploadedImageUrl: string | null = null; // Para guardar la URL que devuelve el backend
@@ -53,7 +55,7 @@ export class HomeComponent implements OnInit {
   error = '';
 
 
-  usuario: any;
+
 
   apiUrl = 'http://localhost:3000';
 
@@ -95,16 +97,31 @@ responsiveOptions: any[] = [
 
   priceRange: number[] = [this.minPrice, this.maxPrice]; // Rango elegido por el usuario
 
+  esAdmin: boolean = false;
+
+
   actualizarFiltrosPrecio() {
     this.filtros.precioMin = this.priceRange[0];
     this.filtros.precioMax = this.priceRange[1];
   }
 
   ngOnInit(): void {
+    const usuarioData = localStorage.getItem('USUARIO');
+
+    if(usuarioData){
+      const usuario = JSON.parse(usuarioData);
+      if(usuario.rol === 'ADMIN'){
+        this.esAdmin = true;
+      }
+    }
+
     this.cargarFiltrosGuardados();
     this.cargarGeneros();
     this.cargarJuegos();
+
   }
+
+
 
   cargarFiltrosGuardados() {
       const filtrosGuardados = localStorage.getItem('filtrosJuegos');

@@ -65,7 +65,7 @@
   </div>
 
   <!-- RESULTADOS -->
-  @if (juegos?.length && !cargando && !error) {
+  @if (juegos.length && !cargando && !error) {
 
     <!-- Más de un juego: carrusel -->
     @if (juegos.length > 1) {
@@ -95,8 +95,10 @@
             </div>
 
             <div class="card-actions">
+              @if(esAdmin){
               <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
               <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
+              }
               <p-button icon="pi pi-shopping-cart" severity="success" (onClick)="agregarAlCarrito(juego.id)"></p-button>
             </div>
           </div>
@@ -124,7 +126,7 @@
             </div>
 
             <div class="card-actions">
-              @if(usuario && usuario.rol?.toLowerCase() === 'admin'){
+              @if(esAdmin){
                 <p-button icon="pi pi-pencil" severity="warn" (onClick)="editarJuego(juego.id)"></p-button>
                 <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarJuego(juego.id)"></p-button>
               }
