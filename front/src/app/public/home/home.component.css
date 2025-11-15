@@ -513,6 +513,10 @@
 /* TABLET — 769px a 1024px */
 @media (min-width: 769px) and (max-width: 1024px) {
 
+  .card-header{
+    margin-bottom: 10px;
+  }
+
   .home-container {
     padding: 2rem;
   }
@@ -548,6 +552,10 @@
 @media (max-width: 768px) {
   .home-container {
     padding: 1.5rem;
+  }
+
+  .card-header{
+    margin-bottom: 10px;
   }
 
   .home-container h1 {
@@ -634,4 +642,67 @@
 .filtro-precio {
   display: flex;
   flex-direction: column;
+}
+
+/* Toast responsive */
+::ng-deep .p-toast {
+  width: 25rem;
+}
+
+::ng-deep .p-toast .p-toast-message {
+  margin: 0 0 1rem 0;
+}
+
+/* Mobile (hasta 768px) */
+@media (max-width: 768px) {
+  ::ng-deep .p-toast {
+    width: calc(100vw - 2rem) !important;
+    max-width: 20rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message {
+    font-size: 0.9rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-message-content {
+    padding: 0.75rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-summary {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-detail {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-icon-close {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* Mobile pequeño (hasta 480px) */
+@media (max-width: 480px) {
+  ::ng-deep .p-toast {
+    max-width: 18rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message {
+    font-size: 0.85rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-content {
+    padding: 0.6rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-summary {
+    font-size: 0.9rem;
+  }
+
+  ::ng-deep .p-toast .p-toast-message .p-toast-detail {
+    font-size: 0.8rem;
+  }
 }
