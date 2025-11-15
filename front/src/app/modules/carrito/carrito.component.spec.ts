@@ -1,7 +1,8 @@
+import { BuscarJuego } from './../juegos/pages/buscar-juego/buscar-juego';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CarritoComponent } from './carrito.component';
 
 
-import { BuscarJuego } from './buscar-juego';
 
 describe('BuscarJuego', () => {
   let component: BuscarJuego;
@@ -15,7 +16,6 @@ describe('BuscarJuego', () => {
 
     fixture = TestBed.createComponent(BuscarJuego);
 
-import { CarritoComponent } from './carrito.component';
 
 describe('CarritoComponent', () => {
   let component: CarritoComponent;
